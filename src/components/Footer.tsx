@@ -1,0 +1,62 @@
+import { siteConfig } from '../config/site';
+import { Logo } from './ui/Logo';
+import { ConfigText } from './ui/Placeholder';
+
+export function Footer() {
+  const { brand, nav, contact, legal } = siteConfig;
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="footer">
+      <div className="container footer__grid">
+        <div className="footer__brand">
+          <Logo tone="light" />
+          <p>{brand.tagline}</p>
+        </div>
+
+        <nav className="footer__col" aria-label="Secciones">
+          <h2 className="footer__heading">Navegación</h2>
+          <ul>
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="footer__col">
+          <h2 className="footer__heading">Contacto</h2>
+          <ul>
+            <li>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </li>
+            <li>
+              <ConfigText value={contact.phone} />
+            </li>
+            <li>
+              <ConfigText value={contact.address} />
+            </li>
+          </ul>
+        </div>
+
+        <nav className="footer__col" aria-label="Información legal">
+          <h2 className="footer__heading">Legal</h2>
+          <ul>
+            {legal.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <div className="container footer__bottom">
+        <p>
+          © {year} {brand.name}. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+  );
+}

@@ -1,0 +1,54 @@
+# EasyHost: landing page comercial
+
+Landing page *one page* de EasyHost, construida con Vite, React y TypeScript. Es un proyecto independiente y no tiene ninguna conexión con Supabase ni con el SaaS.
+
+## Puesta en marcha
+
+```bash
+npm install
+npm run dev       # desarrollo en http://localhost:5173
+npm run build     # versión de producción en /dist
+npm run preview   # previsualiza /dist
+```
+
+## Dónde cambiar cada cosa
+
+| Qué quieres cambiar | Archivo |
+| --- | --- |
+| **Planes y precios** (nombre, precio, descripción, funcionalidades, botón, plan recomendado, moneda, nota de suscripción) | `src/config/plans.ts` |
+| **Funcionalidades** (añadir, quitar o reordenar tarjetas) | `src/config/features.ts` |
+| **Textos** de hero, problema/solución, pasos, ventajas y CTA final | `src/config/content.ts` |
+| **Navegación, logotipo, contacto, enlaces legales y destino del formulario** | `src/config/site.ts` |
+| **Colores, tipografía y espaciados** | `src/styles/tokens.css` |
+| **SEO** (title, description, Open Graph, dominio) | `index.html` |
+| **Imagen para redes sociales** (1200×630) | `public/og-image.png` |
+| **Páginas legales** | `public/aviso-legal/`, `public/politica-de-privacidad/`, `public/politica-de-cookies/` |
+
+### Placeholders
+
+Cualquier texto escrito entre corchetes, como `[Precio]` o `[Teléfono de contacto]`, se muestra en la web con un borde discontinuo, para que no se publique por error. Al escribir el valor real, el borde desaparece.
+
+### Logotipo
+
+Coloca el archivo en `public/` (por ejemplo `public/logo.svg`) y en `src/config/site.ts` escribe `logoSrc: '/logo.svg'`.
+
+### Formulario de demo
+
+En `src/config/site.ts`, en `contact.formEndpoint`:
+
+- **`null`** (valor actual): al enviar, se abre el correo del visitante con la solicitud ya redactada para `contact.email`.
+- **Una URL**: los datos se envían por `POST` en JSON (`name`, `restaurant`, `email`, `phone`, `message`, `source`). Sirve, por ejemplo, para una Edge Function de Supabase, Formspree o un webhook.
+
+La lógica está en `src/lib/contact.ts`.
+
+## Estructura
+
+```
+src/
+  config/        datos editables (planes, funcionalidades, textos, sitio)
+  components/    secciones de la página
+    ui/          piezas reutilizables (Button, Logo, SectionHeader, Placeholder)
+  hooks/         animación al hacer scroll y sección activa del menú
+  lib/           envío del formulario
+  styles/        tokens, base y estilos de secciones
+```

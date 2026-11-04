@@ -1,0 +1,49 @@
+/*
+ * TOKENS DE DISEÑO
+ * Cambia aquí colores, tipografía y espaciados de toda la web.
+ */
+:root {
+  /* Color */
+  --ink: #17282a; /* Tinta pizarra: texto y fondos oscuros */
+  --bottle: #2b4a45; /* Verde botella: superficies oscuras secundarias */
+  --linen: #eef2ef; /* Mantel: fondos suaves */
+  --white: #ffffff;
+  --saffron: #f0b23a; /* Azafrán: solo para acciones principales */
+  --saffron-hover: #e3a223;
+  --muted: #56676a; /* Texto secundario */
+  --line: #d7dfdb; /* Bordes y separadores */
+  --on-dark: #e6eeeb;
+  --on-dark-muted: #a9bbb6;
+  --line-dark: rgba(230, 238, 235, 0.14);
+
+  /* Estados del mockup */
+  --ok: #2f7d5b;
+  --ok-bg: #e2f1e9;
+  --wait: #9a6a07;
+  --wait-bg: #fbefd2;
+  --seated-bg: #e4e9f3;
+  --seated: #3d5a8a;
+
+  /* Tipografía: escala modular 1.25 sobre 17px */
+  --font: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --fs-xs: 0.8125rem; /* 13 */
+  --fs-sm: 0.9375rem; /* 15 */
+  --fs-base: 1.0625rem; /* 17 */
+  --fs-md: 1.3125rem; /* 21 */
+  --fs-lg: clamp(1.4rem, 1.2rem + 0.8vw, 1.65rem); /* ~26 */
+  --fs-xl: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); /* ~41 */
+  --fs-hero: clamp(2.5rem, 1.6rem + 3.8vw, 4.1rem); /* ~65 */
+
+  /* Espaciado y layout */
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --container: 1200px;
+  --section-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --nav-h: 72px;
+
+  /* Radios: pequeños en controles, mayores en superficies */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
