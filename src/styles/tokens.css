@@ -1,49 +1,70 @@
 /*
  * TOKENS DE DISEÑO
- * Cambia aquí colores, tipografía y espaciados de toda la web.
+ * Dirección: talonario de comandas. Papel blanco frío, tinta azul de bolígrafo
+ * y numeración roja impresa. Los neutros están teñidos hacia el azul de la marca (tono 262).
  */
 :root {
-  /* Color */
-  --ink: #17282a; /* Tinta pizarra: texto y fondos oscuros */
-  --bottle: #2b4a45; /* Verde botella: superficies oscuras secundarias */
-  --linen: #eef2ef; /* Mantel: fondos suaves */
-  --white: #ffffff;
-  --saffron: #f0b23a; /* Azafrán: solo para acciones principales */
-  --saffron-hover: #e3a223;
-  --muted: #56676a; /* Texto secundario */
-  --line: #d7dfdb; /* Bordes y separadores */
-  --on-dark: #e6eeeb;
-  --on-dark-muted: #a9bbb6;
-  --line-dark: rgba(230, 238, 235, 0.14);
+  /* Papel */
+  --paper: oklch(0.982 0.004 262);
+  --paper-2: oklch(0.955 0.009 262); /* secciones alternas */
+  --sheet: oklch(0.995 0.002 262); /* hojas y paneles sobre el papel */
+
+  /* Tinta */
+  --ink: oklch(0.25 0.045 265); /* texto y fondos oscuros */
+  --ink-deep: oklch(0.2 0.04 265); /* footer */
+  --muted: oklch(0.47 0.028 262); /* texto secundario */
+
+  /* Marca */
+  --blue: oklch(0.45 0.17 262); /* azul bolígrafo: acciones */
+  --blue-hover: oklch(0.39 0.16 262);
+  --blue-soft: oklch(0.93 0.03 262);
+  --carmine: oklch(0.54 0.19 25); /* solo numeración de comandas */
+
+  /* Líneas */
+  --rule: oklch(0.89 0.014 262);
+  --rule-strong: oklch(0.8 0.02 262);
+  --rule-notebook: oklch(0.86 0.035 250);
+
+  /* Sobre tinta */
+  --on-ink: oklch(0.96 0.008 262);
+  --on-ink-muted: oklch(0.82 0.025 262);
+  --rule-on-ink: oklch(0.96 0.008 262 / 0.16);
 
   /* Estados del mockup */
-  --ok: #2f7d5b;
-  --ok-bg: #e2f1e9;
-  --wait: #9a6a07;
-  --wait-bg: #fbefd2;
-  --seated-bg: #e4e9f3;
-  --seated: #3d5a8a;
+  --ok: oklch(0.48 0.1 155);
+  --ok-bg: oklch(0.94 0.04 155);
+  --wait: oklch(0.5 0.1 70);
+  --wait-bg: oklch(0.95 0.05 85);
 
-  /* Tipografía: escala modular 1.25 sobre 17px */
-  --font: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
-  --fs-xs: 0.8125rem; /* 13 */
-  --fs-sm: 0.9375rem; /* 15 */
-  --fs-base: 1.0625rem; /* 17 */
-  --fs-md: 1.3125rem; /* 21 */
-  --fs-lg: clamp(1.4rem, 1.2rem + 0.8vw, 1.65rem); /* ~26 */
-  --fs-xl: clamp(1.9rem, 1.4rem + 2vw, 2.6rem); /* ~41 */
-  --fs-hero: clamp(2.5rem, 1.6rem + 3.8vw, 4.1rem); /* ~65 */
+  /* Tipografía: escala 1.25 sobre 17px; titulares fluidos */
+  --font-display: 'Young Serif', Georgia, serif;
+  --font-body: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: 1.0625rem;
+  --fs-md: 1.3125rem;
+  --fs-lg: clamp(1.45rem, 1.25rem + 0.8vw, 1.75rem);
+  --fs-xl: clamp(2rem, 1.45rem + 2.2vw, 2.85rem);
+  --fs-hero: clamp(2.6rem, 1.6rem + 4.2vw, 4.6rem);
 
-  /* Espaciado y layout */
+  /* Espaciado: escala de 4pt */
+  --space-2xs: 0.25rem; /* 4 */
+  --space-xs: 0.5rem; /* 8 */
+  --space-sm: 0.75rem; /* 12 */
+  --space-md: 1rem; /* 16 */
+  --space-lg: 1.5rem; /* 24 */
+  --space-xl: 2rem; /* 32 */
+  --space-2xl: 3rem; /* 48 */
+  --space-3xl: 4rem; /* 64 */
+  --space-4xl: 6rem; /* 96 */
+
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --container: 1200px;
   --section-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
   --nav-h: 72px;
 
-  /* Radios: pequeños en controles, mayores en superficies */
-  --r-sm: 8px;
-  --r-md: 14px;
-  --r-lg: 22px;
+  --r-sm: 6px;
+  --r-md: 12px;
 
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out-quint */
 }

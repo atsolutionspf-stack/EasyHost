@@ -3,6 +3,7 @@ import { problemContent } from '../config/content';
 import { useReveal } from '../hooks/useReveal';
 import { SectionHeader } from './ui/SectionHeader';
 
+/** "Antes" sobre papel pautado de libreta; "con EasyHost" en tinta. */
 export function ProblemSolution() {
   const listRef = useReveal<HTMLDivElement>();
   const solutionRef = useReveal<HTMLDivElement>();
@@ -14,24 +15,20 @@ export function ProblemSolution() {
         <SectionHeader id="problem-title" title={problemContent.title} />
 
         <div className="problem__grid">
-          <div ref={listRef} className="problem__list reveal">
-            <p className="problem__intro">{problemContent.intro}</p>
-            <ul>
-              {problemContent.problems.map(({ icon: Icon, title, text }) => (
+          <div ref={listRef} className="notebook reveal">
+            <h3 className="notebook__label">{problemContent.intro}</h3>
+            <ul className="notebook__list">
+              {problemContent.problems.map(({ title, text }) => (
                 <li key={title}>
-                  <span className="problem__icon">
-                    <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
+                  <p className="notebook__title">{title}</p>
+                  <p className="notebook__text">{text}</p>
                 </li>
               ))}
             </ul>
           </div>
 
           <div ref={solutionRef} className="solution reveal reveal--delay">
+            <p className="solution__label">{problemContent.solutionLabel}</p>
             <h3 className="solution__title">{solution.title}</h3>
             <p className="solution__text">{solution.text}</p>
             <ul className="solution__points">

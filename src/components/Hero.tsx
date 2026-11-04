@@ -25,6 +25,7 @@ export function Hero() {
         </div>
 
         <figure className="hero__visual">
+          <div className="hero__notebook" aria-hidden="true" />
           <DashboardMockup />
           <figcaption className="hero__caption">{heroContent.mockupCaption}</figcaption>
         </figure>

@@ -16,15 +16,10 @@ export function Benefits() {
         </div>
 
         <ul ref={listRef} className="benefits__list reveal reveal--delay">
-          {benefitsContent.benefits.map(({ icon: Icon, title, text }) => (
+          {benefitsContent.benefits.map(({ title, text }) => (
             <li key={title} className="benefit">
-              <span className="benefit__icon">
-                <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="benefit__title">{title}</h3>
-                <p className="benefit__text">{text}</p>
-              </div>
+              <h3 className="benefit__title">{title}</h3>
+              <p className="benefit__text">{text}</p>
             </li>
           ))}
         </ul>

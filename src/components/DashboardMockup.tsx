@@ -103,10 +103,12 @@ export function DashboardMockup() {
       {/* Comanda: el único movimiento orquestado de la página */}
       <div className="ticket">
         <div className="ticket__paper">
-          <p className="ticket__label">
-            <ShoppingBag size={14} strokeWidth={2} /> Nuevo pedido online
-          </p>
-          <p className="ticket__number">Pedido 0142</p>
+          <div className="ticket__head">
+            <p className="ticket__label">
+              <ShoppingBag size={14} strokeWidth={2} /> Pedido online
+            </p>
+            <p className="ticket__number">Nº 0142</p>
+          </div>
           <p className="ticket__pickup">Para recoger a las 14:15</p>
           <ul className="ticket__items">
             <li>
