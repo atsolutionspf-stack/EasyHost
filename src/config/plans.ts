@@ -1,5 +1,5 @@
 /**
- * PLANES DEL TPV (SUSCRIPCIÓN MENSUAL)
+ * PLANES DEL TPV: DOS SUSCRIPCIONES MENSUALES Y UN PLAN PERSONALIZADO
  * ------------------------------------
  * 1) Para cambiar un PRECIO, cámbialo solo en el bloque `prices` de aquí abajo.
  *    Vale para las dos versiones de la web (español e inglés).
@@ -18,7 +18,7 @@ import { pick } from '../i18n';
 export const prices = {
   basico: '15',
   profesional: '25',
-  premium: '30',
+  // El plan Personalizado no tiene precio: muestra un botón de presupuesto.
 };
 
 /* ================================================================== */
@@ -27,8 +27,8 @@ export const prices = {
 export type Plan = {
   id: string;
   name: string;
-  /** Precio mensual, sin símbolo €. */
-  price: string;
+  /** Precio mensual, sin símbolo €. `null` = sin precio (plan a medida, con botón de contacto). */
+  price: string | null;
   description: string;
   /** Primera línea en negrita, p. ej. "Todo lo del Plan Básico, más:". Opcional. */
   includesPrevious?: string;
@@ -46,13 +46,20 @@ export const pricingConfig = pick({
     period: '/mes',
     planPrefix: 'Plan',
     highlightLabel: 'Recomendado',
-    note: 'Todos los planes del TPV se contratan mediante suscripción mensual.',
+    customPriceLabel: 'A medida',
+    customPriceNote: 'Precio según tu proyecto',
+    note: 'Los planes Básico y Profesional se contratan mediante suscripción mensual.',
+    /** Línea bajo los planes que enlaza con Lintel (la URL está en site.ts). */
+    lintel: { before: '¿También necesitas una web? La hacemos con ', name: 'Lintel', after: ', conectada a tu TPV.', link: 'Ver Lintel' },
   },
   en: {
     period: '/month',
     planPrefix: '',
     highlightLabel: 'Recommended',
-    note: 'All POS plans are billed as a monthly subscription.',
+    customPriceLabel: 'Tailored',
+    customPriceNote: 'Priced to your project',
+    note: 'Basic and Professional are billed as a monthly subscription.',
+    lintel: { before: 'Need a website too? We build it with ', name: 'Lintel', after: ', connected to your POS.', link: 'Visit Lintel' },
   },
 });
 
@@ -77,13 +84,13 @@ export const plans: Plan[] = pick<Plan[]>({
       highlighted: true,
     },
     {
-      id: 'premium',
-      name: 'Premium',
-      price: prices.premium,
-      description: 'Para quien gestiona varios locales y quiere el control completo.',
+      id: 'personalizado',
+      name: 'Personalizado',
+      price: null,
+      description: 'Para varios locales o necesidades propias. Lo adaptamos a tu negocio.',
       includesPrevious: 'Todo lo del Plan Profesional, más:',
       features: ['Multi-restaurante', 'Control de stock', 'CRM', 'Analítica completa'],
-      cta: { label: 'Solicitar información', href: '#contacto' },
+      cta: { label: 'Pedir presupuesto', href: '#contacto' },
     },
   ],
   en: [
@@ -113,13 +120,13 @@ export const plans: Plan[] = pick<Plan[]>({
       highlighted: true,
     },
     {
-      id: 'premium',
-      name: 'Premium',
-      price: prices.premium,
-      description: 'For owners running several venues who want full control.',
+      id: 'personalizado',
+      name: 'Custom',
+      price: null,
+      description: 'For several venues or specific needs. We tailor it to your business.',
       includesPrevious: 'Everything in Professional, plus:',
       features: ['Multi-restaurant', 'Stock control', 'CRM', 'Full analytics'],
-      cta: { label: 'Get information', href: '#contacto' },
+      cta: { label: 'Request a quote', href: '#contacto' },
     },
   ],
 });

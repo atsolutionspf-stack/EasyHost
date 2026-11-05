@@ -13,6 +13,9 @@ export function Footer() {
         <div className="footer__brand">
           <Logo tone="light" />
           <p>{brand.tagline}</p>
+          <p className="footer__lintel">
+            <a href={siteConfig.lintel.url}>{siteConfig.lintel.footerLabel}</a>
+          </p>
         </div>
 
         <nav className="footer__col" aria-label={ui.footer.navigation}>

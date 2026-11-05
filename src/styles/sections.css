@@ -1193,3 +1193,33 @@
     margin-left: 0;
   }
 }
+
+/* ---------- Plan personalizado y enlace a Lintel ---------- */
+.plan__amount--custom {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.plan__price--custom {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+.pricing__lintel {
+  margin-top: var(--space-md);
+  text-align: center;
+  font-size: var(--fs-base);
+}
+.pricing__lintel a {
+  margin-left: var(--space-2xs);
+  font-weight: 650;
+  color: var(--blue);
+  text-underline-offset: 4px;
+}
+.footer__lintel {
+  margin-top: var(--space-sm) !important;
+}
+.footer__lintel a {
+  color: var(--on-ink);
+  text-underline-offset: 3px;
+}

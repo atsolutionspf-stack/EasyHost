@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react';
 import { plans, pricingConfig, type Plan } from '../config/plans';
+import { siteConfig } from '../config/site';
 import { pricingContent } from '../config/content';
 import { ui } from '../config/ui';
 import { formatMoney, lang } from '../i18n';
@@ -42,12 +43,19 @@ function PlanCard({ plan }: { plan: Plan }) {
         {featured && <span className="plan__badge">{pricingConfig.highlightLabel}</span>}
       </header>
 
-      <p className="plan__price">
-        <span className="plan__amount">
-          <Money value={plan.price} />
-        </span>
-        <span className="plan__period">{pricingConfig.period}</span>
-      </p>
+      {plan.price === null ? (
+        <p className="plan__price plan__price--custom">
+          <span className="plan__amount plan__amount--custom">{pricingConfig.customPriceLabel}</span>
+          <span className="plan__period">{pricingConfig.customPriceNote}</span>
+        </p>
+      ) : (
+        <p className="plan__price">
+          <span className="plan__amount">
+            <Money value={plan.price} />
+          </span>
+          <span className="plan__period">{pricingConfig.period}</span>
+        </p>
+      )}
 
       <p className="plan__desc">
         <ConfigText value={plan.description} />
@@ -88,6 +96,12 @@ export function Pricing() {
           ))}
         </div>
         <p className="pricing__note">{pricingConfig.note}</p>
+        <p className="pricing__lintel">
+          {pricingConfig.lintel.before}
+          <strong>{pricingConfig.lintel.name}</strong>
+          {pricingConfig.lintel.after}{' '}
+          <a href={siteConfig.lintel.url}>{pricingConfig.lintel.link}</a>
+        </p>
       </div>
     </section>
   );

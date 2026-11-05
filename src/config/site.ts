@@ -22,6 +22,11 @@ const shared = {
    * Si es `null`, el formulario abre el cliente de correo con la solicitud ya redactada.
    */
   formEndpoint: null as string | null,
+  /**
+   * Web de Lintel (venta de webs). Cambia aquí la dirección cuando tenga dominio definitivo.
+   * Se usa en la línea bajo los precios y en el pie de página.
+   */
+  lintelUrl: 'https://lintel.atsolutionspf.workers.dev',
 };
 
 export const siteConfig = pick({
@@ -46,6 +51,7 @@ export const siteConfig = pick({
       address: '[Dirección o ciudad]',
       formEndpoint: shared.formEndpoint,
     },
+    lintel: { url: `${shared.lintelUrl}/`, footerLabel: 'Webs a medida: Lintel' },
     legal: [
       { label: 'Aviso legal', href: '/aviso-legal/' },
       { label: 'Política de privacidad', href: '/politica-de-privacidad/' },
@@ -73,6 +79,7 @@ export const siteConfig = pick({
       address: '[Address or city]',
       formEndpoint: shared.formEndpoint,
     },
+    lintel: { url: `${shared.lintelUrl}/en/`, footerLabel: 'Custom websites: Lintel' },
     legal: [
       { label: 'Legal notice', href: '/en/legal-notice/' },
       { label: 'Privacy policy', href: '/en/privacy-policy/' },
