@@ -1,6 +1,6 @@
-# EasyHost: landing page comercial
+# Clientia: landing page comercial
 
-Landing page *one page* de EasyHost, construida con Vite, React y TypeScript. Es un proyecto independiente y no tiene ninguna conexión con Supabase ni con el SaaS.
+Landing page *one page* de Clientia, construida con Vite, React y TypeScript. Es un proyecto independiente y no tiene ninguna conexión con Supabase ni con el SaaS.
 
 ## Puesta en marcha
 

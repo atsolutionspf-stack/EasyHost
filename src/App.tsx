@@ -1,5 +1,6 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { Sectors } from './components/Sectors';
 import { ProblemSolution } from './components/ProblemSolution';
 import { Features } from './components/Features';
 import { HowItWorks } from './components/HowItWorks';
@@ -18,6 +19,7 @@ export default function App() {
       <Navbar />
       <main id="main">
         <Hero />
+        <Sectors />
         <ProblemSolution />
         <Features />
         <HowItWorks />

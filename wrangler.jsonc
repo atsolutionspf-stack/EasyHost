@@ -1,5 +1,7 @@
 // Configuración de despliegue en Cloudflare Workers (sitio estático).
 // Cloudflare ejecuta `npm run build` y publica la carpeta ./dist.
+// "name" es el nombre del Worker ya conectado en Cloudflare; no lo cambies aunque la marca sea Clientia,
+// o el despliegue automático dejará de funcionar. Para renombrarlo, hazlo antes en el panel de Cloudflare.
 {
   "name": "easyhost",
   "compatibility_date": "2025-10-01",

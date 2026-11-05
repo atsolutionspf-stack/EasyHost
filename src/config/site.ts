@@ -8,14 +8,14 @@ import { pick } from '../i18n';
 
 /* Datos comunes a los dos idiomas */
 const shared = {
-  name: 'EasyHost',
+  name: 'Clientia',
   /**
    * Logotipo. Déjalo en `null` para usar el logotipo de texto.
    * Para usar una imagen, colócala en /public (p. ej. /public/logo.svg) y escribe aquí '/logo.svg'.
    */
   logoSrc: null as string | null,
   /** Email que recibe las solicitudes de demo (también se usa si no hay endpoint). */
-  email: 'contacto@easyhost.example',
+  email: 'contacto@clientia.example',
   /**
    * URL a la que el formulario enviará los datos en JSON (POST).
    * Puede ser una Edge Function de Supabase, Formspree, un webhook, etc.
@@ -35,7 +35,7 @@ export const siteConfig = pick({
       name: shared.name,
       logoSrc: shared.logoSrc,
       tagline:
-        'TPV para restaurantes, bares, cafeterías y negocios de hostelería: sala, cocina, reservas, pedidos online y cierre de caja.',
+        'TPV y CRM para comercios, hostelería y servicios: ventas, caja, stock, reservas, pedidos online y la ficha de cada cliente.',
     },
     nav: [
       { label: 'Inicio', href: '#inicio' },
@@ -63,7 +63,7 @@ export const siteConfig = pick({
       name: shared.name,
       logoSrc: shared.logoSrc,
       tagline:
-        'POS system for restaurants, bars, cafés and hospitality businesses: front of house, kitchen, bookings, online orders and end-of-day cash-up.',
+        'POS and CRM for shops, hospitality and services: sales, cash-up, stock, bookings, online orders and every customer’s profile.',
     },
     nav: [
       { label: 'Home', href: '#inicio' },

@@ -11,95 +11,114 @@ export type TitleText = { title: string; text: string };
 
 export const heroContent = pick({
   es: {
-    title: 'Gestiona tu restaurante de forma más sencilla.',
-    lead: 'Más reservas, más pedidos y menos complicaciones.',
+    audience: 'TPV y CRM para comercios, hostelería y servicios',
+    title: 'Vende, cobra y conoce a tus clientes desde un solo sitio.',
+    lead: 'El TPV y el CRM de tu negocio, conectados.',
     subtitle:
-      'EasyHost es el TPV que reúne la sala, la cocina, las reservas, los pedidos online y el cierre de caja en una única plataforma. Ahorra tiempo y ofrece una mejor experiencia a tus clientes.',
-    secondaryCta: { label: 'Descubrir funcionalidades', href: '#funcionalidades' },
-    audience: 'TPV para restaurantes, bares, cafeterías y negocios de hostelería.',
-    mockupCaption: 'Vista ilustrativa del panel de EasyHost',
+      'Clientia reúne las ventas, la caja, el stock, las reservas, los pedidos online y la ficha de cada cliente en una única plataforma. Menos herramientas sueltas, más tiempo para atender.',
+    secondaryCta: { label: 'Ver funcionalidades', href: '#funcionalidades' },
+    mockupCaption: 'Vista ilustrativa de Clientia con datos de ejemplo',
   },
   en: {
-    title: 'Run your restaurant the simple way.',
-    lead: 'More bookings, more orders, fewer headaches.',
+    audience: 'POS and CRM for shops, hospitality and services',
+    title: 'Sell, take payments and know your customers from one place.',
+    lead: 'Your business’s POS and CRM, connected.',
     subtitle:
-      'EasyHost is the POS system that brings front of house, kitchen, bookings, online orders and end-of-day cash-up together on one platform. Save time and give your customers a better experience.',
+      'Clientia brings sales, cash-up, stock, bookings, online orders and every customer’s profile together on one platform. Fewer scattered tools, more time to serve.',
     secondaryCta: { label: 'See the features', href: '#funcionalidades' },
-    audience: 'POS for restaurants, bars, cafés and hospitality businesses.',
-    mockupCaption: 'Illustrative view of the EasyHost dashboard',
+    mockupCaption: 'Illustrative view of Clientia with sample data',
+  },
+});
+
+export const sectorsContent = pick({
+  es: {
+    title: 'Pensado para negocios que atienden a sus clientes cada día',
+    sectors: [
+      { id: 'comercio', title: 'Comercio', text: 'Tiendas, boutiques y comercios de barrio' },
+      { id: 'hosteleria', title: 'Hostelería', text: 'Bares, restaurantes y cafeterías' },
+      { id: 'servicios', title: 'Servicios', text: 'Estudios, talleres y negocios con cita' },
+    ],
+  },
+  en: {
+    title: 'Built for businesses that serve customers every day',
+    sectors: [
+      { id: 'comercio', title: 'Retail', text: 'Shops, boutiques and local stores' },
+      { id: 'hosteleria', title: 'Hospitality', text: 'Bars, restaurants and cafés' },
+      { id: 'servicios', title: 'Services', text: 'Studios, workshops and appointment-based businesses' },
+    ],
   },
 });
 
 export const problemContent = pick({
   es: {
-    title: 'El servicio ya es bastante intenso. La gestión no debería serlo.',
-    intro: 'Así se organizan todavía muchos restaurantes',
-    solutionLabel: 'Con EasyHost',
+    title: 'Atender ya es bastante trabajo. La gestión no debería serlo.',
+    intro: 'Así trabajan todavía muchos negocios',
+    solutionLabel: 'Con Clientia',
     problems: [
       {
-        title: 'Reservas por teléfono o en libreta',
-        text: 'Llamadas en plena hora punta y apuntes que se pierden o se duplican.',
+        title: 'La caja en un sitio y los clientes en otro',
+        text: 'Ventas, cobros y datos de clientes repartidos entre programas, libretas y hojas de cálculo.',
       },
       {
-        title: 'Pedidos por muchos canales',
-        text: 'Teléfono, mensajes, redes sociales… cada pedido llega por un sitio distinto.',
+        title: 'Pedidos y reservas por muchos canales',
+        text: 'Teléfono, mensajes, redes sociales… cada uno llega por un sitio distinto.',
       },
       {
         title: 'Horas en tareas administrativas',
-        text: 'Tiempo que se va en apuntar, confirmar y revisar en lugar de atender.',
+        text: 'Tiempo que se va en apuntar, cuadrar y revisar en lugar de atender.',
+      },
+      {
+        title: 'Sin saber quién vuelve',
+        text: 'Sin una ficha de cada cliente es difícil cuidar a los habituales.',
       },
       {
         title: 'Dependencia de plataformas externas',
         text: 'Tus clientes y tus ventas pasan por canales que no controlas.',
       },
-      {
-        title: 'Un negocio difícil de organizar',
-        text: 'Sin una visión clara de lo que tienes hoy, mañana y esta semana.',
-      },
     ] satisfies TitleText[],
     solution: {
-      title: 'EasyHost lo reúne todo en un único sistema.',
-      text: 'El TPV, la cocina, las reservas y los pedidos online en una misma plataforma, pensada para usarla sin conocimientos técnicos.',
+      title: 'Clientia lo reúne todo en un único sistema.',
+      text: 'El TPV, la caja, el stock y la ficha de cada cliente en una misma plataforma, pensada para usarla sin conocimientos técnicos.',
       points: [
-        'La sala, la cocina, las reservas y los pedidos trabajan conectados.',
+        'Ventas, caja y clientes trabajan conectados.',
         'Tus clientes reservan y piden desde tu propia web.',
-        'Tú lo organizas todo desde el móvil, la tablet o el ordenador.',
+        'Lo consultas todo desde el móvil, la tablet o el ordenador.',
       ],
     },
   },
   en: {
-    title: 'Service is intense enough. Running the place shouldn’t be.',
-    intro: 'How many restaurants still get organised',
-    solutionLabel: 'With EasyHost',
+    title: 'Serving customers is work enough. Running the business shouldn’t be.',
+    intro: 'How many businesses still work',
+    solutionLabel: 'With Clientia',
     problems: [
       {
-        title: 'Bookings by phone or in a notebook',
-        text: 'Calls in the middle of the rush and notes that get lost or double-booked.',
+        title: 'The till in one place, customers in another',
+        text: 'Sales, payments and customer data spread across apps, notebooks and spreadsheets.',
       },
       {
-        title: 'Orders coming from everywhere',
-        text: 'Phone, messages, social media… every order arrives through a different channel.',
+        title: 'Orders and bookings from everywhere',
+        text: 'Phone, messages, social media… each one arrives through a different channel.',
       },
       {
         title: 'Hours lost on admin',
-        text: 'Time spent writing down, confirming and checking instead of serving.',
+        text: 'Time spent writing down, balancing and checking instead of serving.',
+      },
+      {
+        title: 'No idea who comes back',
+        text: 'Without a profile for each customer, it’s hard to look after your regulars.',
       },
       {
         title: 'Relying on third-party platforms',
         text: 'Your customers and your sales go through channels you don’t control.',
       },
-      {
-        title: 'A business that’s hard to organise',
-        text: 'No clear view of what’s coming today, tomorrow or this week.',
-      },
     ] satisfies TitleText[],
     solution: {
-      title: 'EasyHost brings it all into one system.',
-      text: 'POS, kitchen, bookings and online orders on one platform, designed to be used without any technical knowledge.',
+      title: 'Clientia brings it all into one system.',
+      text: 'POS, cash-up, stock and every customer’s profile on one platform, designed to be used without any technical knowledge.',
       points: [
-        'Front of house, kitchen, bookings and orders all work together.',
+        'Sales, cash-up and customers work together.',
         'Your customers book and order from your own website.',
-        'You manage everything from your phone, tablet or computer.',
+        'You check everything from your phone, tablet or computer.',
       ],
     },
   },
@@ -107,49 +126,49 @@ export const problemContent = pick({
 
 export const featuresContent = pick({
   es: {
-    title: 'Todo lo que necesitas para llevar tu restaurante.',
-    intro: 'Del TPV de sala al cierre de caja, en una sola plataforma.',
+    title: 'Todo lo que necesitas para llevar tu negocio.',
+    intro: 'Del cobro en el mostrador al cierre de caja, con tus clientes siempre a mano.',
   },
   en: {
-    title: 'Everything you need to run your restaurant.',
-    intro: 'From the front-of-house POS to the end-of-day cash-up, on one platform.',
+    title: 'Everything you need to run your business.',
+    intro: 'From the counter to the end-of-day cash-up, with your customers always at hand.',
   },
 });
 
 export const stepsContent = pick({
   es: {
     title: 'Empezar es sencillo.',
-    intro: 'Nos encargamos de la puesta en marcha para que tú sigas centrado en tu restaurante.',
+    intro: 'Nos encargamos de la puesta en marcha para que tú sigas centrado en tu negocio.',
     steps: [
       {
-        title: 'Configuramos tu restaurante',
-        text: 'Adaptamos la plataforma a tu negocio: tu carta, tus mesas y tus horarios.',
+        title: 'Configuramos tu negocio',
+        text: 'Adaptamos la plataforma a tu negocio: tus productos, tus precios y tus horarios.',
       },
       {
-        title: 'Tus clientes reservan y piden online',
-        text: 'Acceden a tu página y realizan sus reservas y pedidos fácilmente.',
+        title: 'Vendes, cobras y atiendes',
+        text: 'Cobras en el mostrador y tus clientes reservan y piden online desde tu web.',
       },
       {
-        title: 'Gestionas todo desde un único panel',
-        text: 'Recibes y organizas las reservas y los pedidos de manera centralizada.',
+        title: 'Lo gestionas todo desde un único panel',
+        text: 'Ventas, caja, pedidos y clientes, organizados en un mismo sitio.',
       },
     ],
   },
   en: {
     title: 'Getting started is easy.',
-    intro: 'We handle the set-up so you can stay focused on your restaurant.',
+    intro: 'We handle the set-up so you can stay focused on your business.',
     steps: [
       {
-        title: 'We set up your restaurant',
-        text: 'We adapt the platform to your business: your menu, your tables and your opening hours.',
+        title: 'We set up your business',
+        text: 'We adapt the platform to your business: your products, your prices and your opening hours.',
       },
       {
-        title: 'Your customers book and order online',
-        text: 'They visit your website and make bookings and orders with ease.',
+        title: 'You sell, take payments and serve',
+        text: 'You take payments at the counter while customers book and order online from your website.',
       },
       {
         title: 'You manage everything from one dashboard',
-        text: 'Bookings and orders arrive and are organised in one place.',
+        text: 'Sales, cash-up, orders and customers, organised in one place.',
       },
     ],
   },
@@ -158,64 +177,64 @@ export const stepsContent = pick({
 export const pricingContent = pick({
   es: {
     title: 'Precios claros, sin sorpresas.',
-    intro: 'Elige el plan del TPV que mejor encaja con tu restaurante. Si tienes dudas, te ayudamos a decidir.',
+    intro: 'Elige el plan que mejor encaja con tu negocio. Si tienes dudas, te ayudamos a decidir.',
   },
   en: {
     title: 'Clear pricing, no surprises.',
-    intro: 'Choose the POS plan that suits your restaurant best. Not sure? We’ll help you choose.',
+    intro: 'Choose the plan that suits your business best. Not sure? We’ll help you choose.',
   },
 });
 
 export const benefitsContent = pick({
   es: {
-    title: 'Menos tiempo gestionando. Más tiempo para tu restaurante.',
+    title: 'Menos tiempo gestionando. Más tiempo para tus clientes.',
     intro: 'Lo que cambia en tu día a día cuando todo está en un mismo lugar.',
     benefits: [
       {
         title: 'Ahorra tiempo en la gestión diaria',
-        text: 'Menos llamadas, menos apuntes a mano y menos tareas repetitivas.',
+        text: 'Menos apuntes a mano, menos programas sueltos y menos tareas repetitivas.',
       },
       {
-        title: 'Mejora la experiencia de tus clientes',
-        text: 'Reservan y piden cuando quieren, sin esperas al teléfono.',
+        title: 'Conoce mejor a tus clientes',
+        text: 'Cada cliente con su ficha, para cuidar a los que vuelven.',
+      },
+      {
+        title: 'Cierra la caja sin sustos',
+        text: 'Las ventas del día, ordenadas y listas para cuadrar.',
       },
       {
         title: 'Recibe reservas y pedidos directamente',
         text: 'Llegan a tu panel desde tu propia web, sin intermediarios.',
       },
       {
-        title: 'Centraliza la gestión de tu restaurante',
-        text: 'Toda la información del negocio, ordenada y en un mismo sitio.',
-      },
-      {
-        title: 'Ten tu propio canal de venta online',
-        text: 'Una web y una carta digital con la imagen de tu restaurante.',
+        title: 'Todo tu negocio en un mismo sitio',
+        text: 'Ventas, stock, pedidos y clientes, desde cualquier dispositivo.',
       },
     ] satisfies TitleText[],
   },
   en: {
-    title: 'Less time on admin. More time for your restaurant.',
+    title: 'Less time on admin. More time for your customers.',
     intro: 'What changes day to day when everything is in one place.',
     benefits: [
       {
         title: 'Save time on daily management',
-        text: 'Fewer calls, fewer handwritten notes and fewer repetitive tasks.',
+        text: 'Fewer handwritten notes, fewer separate apps and fewer repetitive tasks.',
       },
       {
-        title: 'Give your customers a better experience',
-        text: 'They book and order whenever they like, without waiting on the phone.',
+        title: 'Get to know your customers',
+        text: 'Every customer has a profile, so you can look after the ones who come back.',
+      },
+      {
+        title: 'Cash up without surprises',
+        text: 'The day’s sales, organised and ready to balance.',
       },
       {
         title: 'Receive bookings and orders directly',
         text: 'They reach your dashboard from your own website, with no middlemen.',
       },
       {
-        title: 'Run your restaurant from one place',
-        text: 'All your business information, organised and in one spot.',
-      },
-      {
-        title: 'Own your online sales channel',
-        text: 'A website and digital menu that look like your restaurant.',
+        title: 'Your whole business in one place',
+        text: 'Sales, stock, orders and customers, from any device.',
       },
     ] satisfies TitleText[],
   },
@@ -223,15 +242,15 @@ export const benefitsContent = pick({
 
 export const finalCtaContent = pick({
   es: {
-    title: 'Tu restaurante merece una gestión más sencilla.',
-    text: 'Empieza a digitalizar tu negocio y descubre todo lo que puedes gestionar desde una única plataforma.',
+    title: 'Tu negocio merece una gestión más sencilla.',
+    text: 'Descubre todo lo que puedes vender, cobrar y gestionar desde una única plataforma.',
     formTitle: 'Solicita tu demo',
-    formIntro: 'Déjanos tus datos y te contactamos para enseñarte EasyHost con tu propio restaurante en mente.',
+    formIntro: 'Déjanos tus datos y te contactamos para enseñarte Clientia con tu negocio en mente.',
   },
   en: {
-    title: 'Your restaurant deserves simpler management.',
-    text: 'Start bringing your business online and discover everything you can manage from a single platform.',
+    title: 'Your business deserves simpler management.',
+    text: 'Discover everything you can sell, take payments for and manage from a single platform.',
     formTitle: 'Book your demo',
-    formIntro: 'Leave us your details and we’ll get in touch to show you EasyHost with your own restaurant in mind.',
+    formIntro: 'Leave us your details and we’ll get in touch to show you Clientia with your business in mind.',
   },
 });

@@ -3,7 +3,7 @@ import { problemContent } from '../config/content';
 import { useReveal } from '../hooks/useReveal';
 import { SectionHeader } from './ui/SectionHeader';
 
-/** "Antes" sobre papel pautado de libreta; "con EasyHost" en tinta. */
+/** "Antes" sobre papel pautado de libreta; "con Clientia" en tinta. */
 export function ProblemSolution() {
   const listRef = useReveal<HTMLDivElement>();
   const solutionRef = useReveal<HTMLDivElement>();

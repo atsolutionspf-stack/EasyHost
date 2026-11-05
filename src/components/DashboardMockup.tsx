@@ -1,47 +1,34 @@
-import { CalendarCheck, ShoppingBag, ChefHat, Receipt, LayoutGrid, Bell } from 'lucide-react';
+import { ScanBarcode, Users, ShoppingBag, CalendarCheck, Receipt, Search, CreditCard, Banknote } from 'lucide-react';
 import { ui } from '../config/ui';
 
 /**
- * Mockup ilustrativo del panel, construido en HTML/CSS (sin imágenes pesadas).
- * Los datos son de ejemplo y solo sirven para mostrar cómo se ve el software.
+ * Mockup ilustrativo de Clientia: pantalla de venta del TPV con la ficha del cliente.
+ * Construido en HTML/CSS (sin imágenes pesadas). Los datos son de ejemplo.
  * Los textos traducibles están en src/config/ui.ts (bloque `mockup`).
  */
 
-type Status = 'confirmada' | 'pendiente' | 'sentada';
-
 const m = ui.mockup;
-
-const reservations: { time: string; name: string; guests: number; table: string; status: Status }[] = [
-  { time: '13:30', name: 'Marta G.', guests: 4, table: `${m.table} 6`, status: 'sentada' },
-  { time: '14:00', name: 'Javier R.', guests: 2, table: `${m.table} 2`, status: 'confirmada' },
-  { time: '14:00', name: 'Lucía P.', guests: 6, table: `${m.table} 9`, status: 'confirmada' },
-  { time: '14:30', name: 'Andrés M.', guests: 3, table: `${m.terrace} 1`, status: 'pendiente' },
-  { time: '15:00', name: 'Carmen L.', guests: 2, table: `${m.table} 4`, status: 'confirmada' },
-];
-
-const navIcons = [LayoutGrid, CalendarCheck, ShoppingBag, ChefHat, Receipt];
-const activeNav = 1;
-const summaryValues = [17, 58, 6];
-const ticketQuantities = [2, 1, 1];
+const navIcons = [ScanBarcode, Users, ShoppingBag, CalendarCheck, Receipt];
+const activeNav = 0;
 
 export function DashboardMockup() {
   return (
-    <div className="mockup" aria-hidden="true">
-      <div className="mockup__window">
-        <div className="mockup__bar">
-          <span className="mockup__dots">
+    <div className="pos" aria-hidden="true">
+      <div className="pos__window">
+        <div className="pos__bar">
+          <span className="pos__dots">
             <i />
             <i />
             <i />
           </span>
-          <span className="mockup__url">panel.easyhost</span>
+          <span className="pos__url">app.clientia</span>
         </div>
 
-        <div className="mockup__body">
-          <aside className="mockup__side">
-            <div className="mockup__venue">
-              <span className="mockup__venue-badge">LT</span>
-              <span>La Taberna</span>
+        <div className="pos__body">
+          <aside className="pos__side">
+            <div className="pos__store">
+              <span className="pos__badge">{m.badge}</span>
+              <span>{m.store}</span>
             </div>
             <ul>
               {m.nav.map((label, i) => {
@@ -56,64 +43,79 @@ export function DashboardMockup() {
             </ul>
           </aside>
 
-          <div className="mockup__main">
-            <div className="mockup__head">
-              <div>
-                <p className="mockup__eyebrow">{m.day}</p>
-                <p className="mockup__title">{m.title}</p>
-              </div>
-              <span className="mockup__bell">
-                <Bell size={15} strokeWidth={1.8} />
-              </span>
+          <div className="pos__catalog">
+            <div className="pos__search">
+              <Search size={14} strokeWidth={2} />
+              {m.search}
             </div>
-
-            <div className="mockup__summary">
-              {m.summary.map((label, i) => (
-                <div key={label}>
-                  <strong>{summaryValues[i]}</strong>
-                  <span>{label}</span>
+            <div className="pos__cats">
+              {m.categories.map((c, i) => (
+                <span key={c} className={i === 0 ? 'is-active' : undefined}>
+                  {c}
+                </span>
+              ))}
+            </div>
+            <div className="pos__grid">
+              {m.products.map(([name, price], i) => (
+                <div key={name} className={`pos__product ${i === 0 ? 'is-picked' : ''}`}>
+                  <span className={`pos__swatch pos__swatch--${i}`} />
+                  <span className="pos__pname">{name}</span>
+                  <span className="pos__price">{price}</span>
                 </div>
               ))}
             </div>
+          </div>
 
-            <ol className="mockup__list">
-              {reservations.map((r) => (
-                <li key={r.name}>
-                  <time>{r.time}</time>
-                  <span className="mockup__name">{r.name}</span>
-                  <span className="mockup__meta">
-                    {r.guests} {m.guests} <em>{r.table}</em>
-                  </span>
-                  <span className={`chip chip--${r.status}`}>{m.status[r.status]}</span>
+          <div className="pos__ticket">
+            <div className="pos__thead">
+              <span>{m.ticket}</span>
+              <span className="pos__tnum">{ui.steps.number} 0142</span>
+            </div>
+            <ul className="pos__lines">
+              {m.lines.map(([qty, name, total]) => (
+                <li key={name}>
+                  <span className="pos__qty">{qty}</span>
+                  <span className="pos__lname">{name}</span>
+                  <span>{total}</span>
                 </li>
               ))}
-            </ol>
+            </ul>
+            <div className="pos__total">
+              <span>{m.totalLabel}</span>
+              <strong>{m.total}</strong>
+            </div>
+            <div className="pos__methods">
+              <span>
+                <CreditCard size={14} strokeWidth={2} /> {m.methods[0]}
+              </span>
+              <span>
+                <Banknote size={14} strokeWidth={2} /> {m.methods[1]}
+              </span>
+            </div>
+            <span className="pos__pay">{m.pay}</span>
           </div>
         </div>
       </div>
 
-      {/* Comanda: el único movimiento orquestado de la página */}
-      <div className="ticket">
-        <div className="ticket__paper">
-          <div className="ticket__head">
-            <p className="ticket__label">
-              <ShoppingBag size={14} strokeWidth={2} /> {m.ticketLabel}
-            </p>
-            <p className="ticket__number">{ui.steps.number} 0142</p>
-          </div>
-          <p className="ticket__pickup">{m.ticketPickup}</p>
-          <ul className="ticket__items">
-            {m.ticketItems.map((item, i) => (
-              <li key={item}>
-                <span>{ticketQuantities[i]}</span> {item}
-              </li>
-            ))}
-          </ul>
-          <div className="ticket__actions">
-            <span className="ticket__accept">{m.accept}</span>
-            <span className="ticket__view">{m.details}</span>
+      {/* Ficha del cliente: el único movimiento orquestado de la página */}
+      <div className="client-card">
+        <p className="client-card__label">{m.client.label}</p>
+        <div className="client-card__head">
+          <span className="client-card__avatar">LP</span>
+          <div>
+            <p className="client-card__name">{m.client.name}</p>
+            <p className="client-card__tag">{m.client.tag}</p>
           </div>
         </div>
+        <div className="client-card__stats">
+          {m.client.stats.map(([value, label]) => (
+            <div key={label}>
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+        <span className="client-card__action">{m.client.action}</span>
       </div>
     </div>
   );

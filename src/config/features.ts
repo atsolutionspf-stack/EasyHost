@@ -1,55 +1,71 @@
 /**
  * FUNCIONALIDADES
  * ---------------
- * Añade, quita o reordena elementos y la sección se adapta sola.
+ * Se muestran como bloques de distintos tamaños (bento).
+ * - `size: 'wide'`  ocupa dos columnas y muestra una mini vista (`visual`).
+ * - `size: 'full'`  ocupa todo el ancho (útil para el bloque de hostelería).
+ * - sin `size`      bloque normal.
  * Cada funcionalidad tiene su texto en español (`es`) y en inglés (`en`).
- * Los iconos vienen de https://lucide.dev (importa el que necesites).
+ * Los iconos vienen de https://lucide.dev.
  */
 import type { LucideIcon } from 'lucide-react';
-import { UtensilsCrossed, CalendarCheck, ShoppingBag, Receipt, ChartColumn, Globe } from 'lucide-react';
+import { ScanBarcode, Users, CalendarCheck, ShoppingBag, Boxes, UtensilsCrossed } from 'lucide-react';
 import { lang, type Lang } from '../i18n';
 
 type FeatureText = { title: string; description: string; items: string[] };
 
-export type Feature = { id: string; icon: LucideIcon } & FeatureText;
+export type Feature = {
+  id: string;
+  icon: LucideIcon;
+  size?: 'wide' | 'full';
+  /** Mini vista ilustrativa del bloque (solo en bloques anchos). */
+  visual?: 'ticket' | 'client';
+} & FeatureText;
 
-const featureList: ({ id: string; icon: LucideIcon } & Record<Lang, FeatureText>)[] = [
+const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>)[] = [
   {
-    id: 'sala-cocina',
-    icon: UtensilsCrossed,
+    id: 'tpv',
+    icon: ScanBarcode,
+    size: 'wide',
+    visual: 'ticket',
     es: {
-      title: 'TPV de sala y cocina',
-      description: 'Toma comandas en sala y envíalas directamente a cocina.',
-      items: ['TPV', 'Plano de salas', 'Comandero y comandero QR', 'KDS: pantalla de cocina', 'Modo offline'],
+      title: 'TPV y caja',
+      description: 'Cobra rápido en el mostrador y cierra la caja del día sin sustos.',
+      items: ['TPV', 'Cierre diario de caja', 'Verifactu', 'Modo offline'],
     },
     en: {
-      title: 'Front-of-house and kitchen POS',
-      description: 'Take orders at the table and send them straight to the kitchen.',
-      items: ['POS', 'Floor plan', 'Order taking, including QR ordering', 'KDS: kitchen display', 'Offline mode'],
+      title: 'POS and cash-up',
+      description: 'Take payments quickly at the counter and close the day without surprises.',
+      items: ['POS', 'Daily cash-up', 'Verifactu (Spanish e-invoicing compliance)', 'Offline mode'],
+    },
+  },
+  {
+    id: 'crm',
+    icon: Users,
+    visual: 'client',
+    es: {
+      title: 'CRM de clientes',
+      description: 'La ficha de cada cliente, para cuidar a los que vuelven.',
+      items: ['CRM', 'Analítica de ventas'],
+    },
+    en: {
+      title: 'Customer CRM',
+      description: 'A profile for every customer, so you can look after your regulars.',
+      items: ['CRM', 'Sales analytics'],
     },
   },
   {
     id: 'reservas',
     icon: CalendarCheck,
     es: {
-      title: 'Gestión de reservas',
+      title: 'Reservas',
       description: 'Todas las reservas del día, ordenadas y a la vista.',
-      items: [
-        'Visualización y organización de reservas',
-        'Gestión de clientes y comensales',
-        'Control de mesas y horarios',
-        'Estados de cada reserva: pendiente, confirmada, sentada…',
-      ],
+      items: ['Organización de reservas', 'Control de horarios', 'Estado de cada reserva'],
     },
     en: {
-      title: 'Booking management',
+      title: 'Bookings',
       description: 'All of today’s bookings, organised and in plain sight.',
-      items: [
-        'View and organise bookings',
-        'Manage customers and covers',
-        'Control tables and time slots',
-        'Booking status: pending, confirmed, seated…',
-      ],
+      items: ['Organise bookings', 'Control time slots', 'Status of every booking'],
     },
   },
   {
@@ -57,75 +73,44 @@ const featureList: ({ id: string; icon: LucideIcon } & Record<Lang, FeatureText>
     icon: ShoppingBag,
     es: {
       title: 'Pedidos online',
-      description: 'Tu carta en internet y los pedidos llegando a un solo sitio.',
-      items: [
-        'Carta digital',
-        'Recepción de pedidos desde tu web',
-        'Gestión de pedidos desde el panel',
-        'Organización de productos y categorías',
-      ],
+      description: 'Tu catálogo en internet y los pedidos llegando a un solo sitio.',
+      items: ['Catálogo o carta digital', 'Pedidos desde tu web', 'Productos y categorías'],
     },
     en: {
       title: 'Online orders',
-      description: 'Your menu online and every order arriving in one place.',
-      items: [
-        'Digital menu',
-        'Orders straight from your website',
-        'Manage orders from the dashboard',
-        'Organise products and categories',
-      ],
+      description: 'Your catalogue online and every order arriving in one place.',
+      items: ['Digital catalogue or menu', 'Orders from your website', 'Products and categories'],
     },
   },
   {
-    id: 'caja',
-    icon: Receipt,
+    id: 'stock',
+    icon: Boxes,
     es: {
-      title: 'Caja y Verifactu',
-      description: 'El cierre del día y Verifactu, en el mismo sistema.',
-      items: ['Cierre diario de caja', 'Verifactu'],
+      title: 'Stock y varios locales',
+      description: 'Controla tu inventario y gestiona más de un local.',
+      items: ['Control de stock', 'Multi-local'],
     },
     en: {
-      title: 'Cash-up and Verifactu',
-      description: 'End-of-day cash-up and Verifactu, in the same system.',
-      items: ['Daily cash-up', 'Verifactu (Spanish e-invoicing compliance)'],
+      title: 'Stock and multiple locations',
+      description: 'Keep track of inventory and manage more than one location.',
+      items: ['Stock control', 'Multi-location'],
     },
   },
   {
-    id: 'control',
-    icon: ChartColumn,
+    id: 'hosteleria',
+    icon: UtensilsCrossed,
+    size: 'full',
     es: {
-      title: 'Control del negocio',
-      description: 'Datos y herramientas para decidir mejor.',
-      items: ['Analítica', 'Control de stock', 'CRM de clientes', 'Multi-restaurante'],
+      title: 'Para hostelería',
+      description: 'Si tienes bar, restaurante o cafetería, la sala y la cocina también van conectadas.',
+      items: ['Plano de salas', 'Comandero y comandero QR', 'KDS: pantalla de cocina'],
     },
     en: {
-      title: 'Business control',
-      description: 'Data and tools to make better decisions.',
-      items: ['Analytics', 'Stock control', 'Customer CRM', 'Multi-restaurant'],
-    },
-  },
-  {
-    id: 'presencia',
-    icon: Globe,
-    es: {
-      title: 'Presencia online',
-      description: 'Un canal propio para que tus clientes te encuentren.',
-      items: [
-        'Página web personalizada para tu restaurante',
-        'Carta digital accesible desde cualquier dispositivo',
-        'Canal propio para recibir reservas y pedidos',
-      ],
-    },
-    en: {
-      title: 'Online presence',
-      description: 'Your own channel for customers to find you.',
-      items: [
-        'A custom website for your restaurant',
-        'Digital menu that works on any device',
-        'Your own channel for bookings and orders',
-      ],
+      title: 'For hospitality',
+      description: 'If you run a bar, restaurant or café, the floor and the kitchen are connected too.',
+      items: ['Floor plan', 'Order taking, including QR ordering', 'KDS: kitchen display'],
     },
   },
 ];
 
-export const features: Feature[] = featureList.map((f) => ({ id: f.id, icon: f.icon, ...f[lang] }));
+export const features: Feature[] = featureList.map(({ es, en, ...rest }) => ({ ...rest, ...(lang === 'en' ? en : es) }));
