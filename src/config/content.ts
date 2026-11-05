@@ -78,8 +78,8 @@ export const stepsContent = {
 };
 
 export const pricingContent = {
-  title: 'Planes para cada tipo de negocio.',
-  intro: 'Elige el plan que mejor se adapta a tu restaurante. Si tienes dudas, te ayudamos a decidir.',
+  title: 'Precios claros, sin sorpresas.',
+  intro: 'El TPV por suscripción mensual, tu web con un pago único y ayuda extra solo cuando la necesites. Si tienes dudas, te ayudamos a decidir.',
 };
 
 export const benefitsContent = {

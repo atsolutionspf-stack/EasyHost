@@ -15,7 +15,7 @@ npm run preview   # previsualiza /dist
 
 | Qué quieres cambiar | Archivo |
 | --- | --- |
-| **Planes y precios** (nombre, precio, descripción, funcionalidades, botón, plan recomendado, moneda, nota de suscripción) | `src/config/plans.ts` |
+| **Precios**: planes del TPV (suscripción mensual), packs de creación de web (pago único, con cuota mensual opcional) y servicios adicionales | `src/config/plans.ts` |
 | **Funcionalidades** (añadir, quitar o reordenar tarjetas) | `src/config/features.ts` |
 | **Textos** de hero, problema/solución, pasos, ventajas y CTA final | `src/config/content.ts` |
 | **Navegación, logotipo, contacto, enlaces legales y destino del formulario** | `src/config/site.ts` |
