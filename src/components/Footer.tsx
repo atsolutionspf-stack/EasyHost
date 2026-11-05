@@ -1,4 +1,5 @@
 import { siteConfig } from '../config/site';
+import { ui } from '../config/ui';
 import { Logo } from './ui/Logo';
 import { ConfigText } from './ui/Placeholder';
 
@@ -14,8 +15,8 @@ export function Footer() {
           <p>{brand.tagline}</p>
         </div>
 
-        <nav className="footer__col" aria-label="Secciones">
-          <h2 className="footer__heading">Navegación</h2>
+        <nav className="footer__col" aria-label={ui.footer.navigation}>
+          <h2 className="footer__heading">{ui.footer.navigation}</h2>
           <ul>
             {nav.map((item) => (
               <li key={item.href}>
@@ -26,7 +27,7 @@ export function Footer() {
         </nav>
 
         <div className="footer__col">
-          <h2 className="footer__heading">Contacto</h2>
+          <h2 className="footer__heading">{ui.footer.contact}</h2>
           <ul>
             <li>
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
@@ -40,8 +41,8 @@ export function Footer() {
           </ul>
         </div>
 
-        <nav className="footer__col" aria-label="Información legal">
-          <h2 className="footer__heading">Legal</h2>
+        <nav className="footer__col" aria-label={ui.footer.legal}>
+          <h2 className="footer__heading">{ui.footer.legal}</h2>
           <ul>
             {legal.map((item) => (
               <li key={item.href}>
@@ -54,7 +55,7 @@ export function Footer() {
 
       <div className="container footer__bottom">
         <p>
-          © {year} {brand.name}. Todos los derechos reservados.
+          © {year} {brand.name}. {ui.footer.rights}
         </p>
       </div>
     </footer>

@@ -1,33 +1,28 @@
 import { CalendarCheck, ShoppingBag, ChefHat, Receipt, LayoutGrid, Bell } from 'lucide-react';
+import { ui } from '../config/ui';
 
 /**
  * Mockup ilustrativo del panel, construido en HTML/CSS (sin imágenes pesadas).
  * Los datos son de ejemplo y solo sirven para mostrar cómo se ve el software.
+ * Los textos traducibles están en src/config/ui.ts (bloque `mockup`).
  */
 
 type Status = 'confirmada' | 'pendiente' | 'sentada';
 
+const m = ui.mockup;
+
 const reservations: { time: string; name: string; guests: number; table: string; status: Status }[] = [
-  { time: '13:30', name: 'Marta G.', guests: 4, table: 'Mesa 6', status: 'sentada' },
-  { time: '14:00', name: 'Javier R.', guests: 2, table: 'Mesa 2', status: 'confirmada' },
-  { time: '14:00', name: 'Lucía P.', guests: 6, table: 'Mesa 9', status: 'confirmada' },
-  { time: '14:30', name: 'Andrés M.', guests: 3, table: 'Terraza 1', status: 'pendiente' },
-  { time: '15:00', name: 'Carmen L.', guests: 2, table: 'Mesa 4', status: 'confirmada' },
+  { time: '13:30', name: 'Marta G.', guests: 4, table: `${m.table} 6`, status: 'sentada' },
+  { time: '14:00', name: 'Javier R.', guests: 2, table: `${m.table} 2`, status: 'confirmada' },
+  { time: '14:00', name: 'Lucía P.', guests: 6, table: `${m.table} 9`, status: 'confirmada' },
+  { time: '14:30', name: 'Andrés M.', guests: 3, table: `${m.terrace} 1`, status: 'pendiente' },
+  { time: '15:00', name: 'Carmen L.', guests: 2, table: `${m.table} 4`, status: 'confirmada' },
 ];
 
-const statusLabel: Record<Status, string> = {
-  confirmada: 'Confirmada',
-  pendiente: 'Pendiente',
-  sentada: 'En mesa',
-};
-
-const nav = [
-  { icon: LayoutGrid, label: 'Sala' },
-  { icon: CalendarCheck, label: 'Reservas', active: true },
-  { icon: ShoppingBag, label: 'Pedidos' },
-  { icon: ChefHat, label: 'Cocina' },
-  { icon: Receipt, label: 'Caja' },
-];
+const navIcons = [LayoutGrid, CalendarCheck, ShoppingBag, ChefHat, Receipt];
+const activeNav = 1;
+const summaryValues = [17, 58, 6];
+const ticketQuantities = [2, 1, 1];
 
 export function DashboardMockup() {
   return (
@@ -49,20 +44,23 @@ export function DashboardMockup() {
               <span>La Taberna</span>
             </div>
             <ul>
-              {nav.map(({ icon: Icon, label, active }) => (
-                <li key={label} className={active ? 'is-active' : undefined}>
-                  <Icon size={15} strokeWidth={1.8} />
-                  {label}
-                </li>
-              ))}
+              {m.nav.map((label, i) => {
+                const Icon = navIcons[i];
+                return (
+                  <li key={label} className={i === activeNav ? 'is-active' : undefined}>
+                    <Icon size={15} strokeWidth={1.8} />
+                    {label}
+                  </li>
+                );
+              })}
             </ul>
           </aside>
 
           <div className="mockup__main">
             <div className="mockup__head">
               <div>
-                <p className="mockup__eyebrow">Jueves, servicio de comida</p>
-                <p className="mockup__title">Reservas de hoy</p>
+                <p className="mockup__eyebrow">{m.day}</p>
+                <p className="mockup__title">{m.title}</p>
               </div>
               <span className="mockup__bell">
                 <Bell size={15} strokeWidth={1.8} />
@@ -70,18 +68,12 @@ export function DashboardMockup() {
             </div>
 
             <div className="mockup__summary">
-              <div>
-                <strong>17</strong>
-                <span>reservas</span>
-              </div>
-              <div>
-                <strong>58</strong>
-                <span>comensales</span>
-              </div>
-              <div>
-                <strong>6</strong>
-                <span>pedidos</span>
-              </div>
+              {m.summary.map((label, i) => (
+                <div key={label}>
+                  <strong>{summaryValues[i]}</strong>
+                  <span>{label}</span>
+                </div>
+              ))}
             </div>
 
             <ol className="mockup__list">
@@ -90,9 +82,9 @@ export function DashboardMockup() {
                   <time>{r.time}</time>
                   <span className="mockup__name">{r.name}</span>
                   <span className="mockup__meta">
-                    {r.guests} pers. <em>{r.table}</em>
+                    {r.guests} {m.guests} <em>{r.table}</em>
                   </span>
-                  <span className={`chip chip--${r.status}`}>{statusLabel[r.status]}</span>
+                  <span className={`chip chip--${r.status}`}>{m.status[r.status]}</span>
                 </li>
               ))}
             </ol>
@@ -105,25 +97,21 @@ export function DashboardMockup() {
         <div className="ticket__paper">
           <div className="ticket__head">
             <p className="ticket__label">
-              <ShoppingBag size={14} strokeWidth={2} /> Pedido online
+              <ShoppingBag size={14} strokeWidth={2} /> {m.ticketLabel}
             </p>
-            <p className="ticket__number">Nº 0142</p>
+            <p className="ticket__number">{ui.steps.number} 0142</p>
           </div>
-          <p className="ticket__pickup">Para recoger a las 14:15</p>
+          <p className="ticket__pickup">{m.ticketPickup}</p>
           <ul className="ticket__items">
-            <li>
-              <span>2</span> Croquetas caseras
-            </li>
-            <li>
-              <span>1</span> Ensalada de temporada
-            </li>
-            <li>
-              <span>1</span> Tarta de queso
-            </li>
+            {m.ticketItems.map((item, i) => (
+              <li key={item}>
+                <span>{ticketQuantities[i]}</span> {item}
+              </li>
+            ))}
           </ul>
           <div className="ticket__actions">
-            <span className="ticket__accept">Aceptar</span>
-            <span className="ticket__view">Ver detalle</span>
+            <span className="ticket__accept">{m.accept}</span>
+            <span className="ticket__view">{m.details}</span>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { stepsContent } from '../config/content';
+import { ui } from '../config/ui';
 import { useReveal } from '../hooks/useReveal';
 import { SectionHeader } from './ui/SectionHeader';
 
@@ -13,10 +14,12 @@ export function HowItWorks() {
           {stepsContent.steps.map((step, i) => (
             <li key={step.title} className="slip">
               <p className="slip__number" aria-hidden="true">
-                Nº {i + 1}
+                {ui.steps.number} {i + 1}
               </p>
               <h3 className="slip__title">
-                <span className="visually-hidden">Paso {i + 1}: </span>
+                <span className="visually-hidden">
+                  {ui.steps.step} {i + 1}:{' '}
+                </span>
                 {step.title}
               </h3>
               <p className="slip__text">{step.text}</p>

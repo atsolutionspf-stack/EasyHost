@@ -1,11 +1,30 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import { ui } from '../config/ui';
+import { langHome } from '../i18n';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { Logo } from './ui/Logo';
 import { Button } from './ui/Button';
 
 const sectionIds = siteConfig.nav.map((item) => item.href.replace('#', ''));
+
+/** Enlace a la otra versión de idioma (español ⇄ inglés). */
+function LangSwitch({ className = '', onClick }: { className?: string; onClick?: () => void }) {
+  const { label, hrefLang, title } = ui.langSwitch;
+  return (
+    <a
+      href={langHome[hrefLang as keyof typeof langHome]}
+      hrefLang={hrefLang}
+      lang={hrefLang}
+      title={title}
+      className={`lang-switch ${className}`.trim()}
+      onClick={onClick}
+    >
+      {label}
+    </a>
+  );
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -34,13 +53,17 @@ export function Navbar() {
       <div className="container navbar__inner">
         <Logo />
 
-        <nav className="navbar__nav" aria-label="Principal">
+        <nav className="navbar__nav" aria-label={ui.nav.main}>
           <ul>
             {siteConfig.nav.map((item) => {
               const isActive = active === item.href.slice(1);
               return (
                 <li key={item.href}>
-                  <a href={item.href} className={isActive ? 'is-active' : undefined} aria-current={isActive ? 'true' : undefined}>
+                  <a
+                    href={item.href}
+                    className={isActive ? 'is-active' : undefined}
+                    aria-current={isActive ? 'true' : undefined}
+                  >
                     {item.label}
                   </a>
                 </li>
@@ -48,6 +71,8 @@ export function Navbar() {
             })}
           </ul>
         </nav>
+
+        <LangSwitch className="navbar__lang" />
 
         <Button href={siteConfig.primaryCta.href} className="navbar__cta">
           {siteConfig.primaryCta.label}
@@ -58,7 +83,7 @@ export function Navbar() {
           className="navbar__toggle"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={open ? ui.nav.close : ui.nav.open}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
@@ -66,7 +91,7 @@ export function Navbar() {
       </div>
 
       <div id="mobile-menu" className={`mobile-menu ${open ? 'is-open' : ''}`} hidden={!open}>
-        <nav aria-label="Menú móvil" className="container">
+        <nav aria-label={ui.nav.mobile} className="container">
           <ul>
             {siteConfig.nav.map((item) => (
               <li key={item.href}>

@@ -6,6 +6,7 @@
  * - Si es `null`, se abre el cliente de correo del visitante con la solicitud redactada.
  */
 import { siteConfig } from '../config/site';
+import { ui } from '../config/ui';
 
 export type DemoRequest = {
   name: string;
@@ -24,19 +25,20 @@ export async function submitDemoRequest(data: DemoRequest): Promise<SubmitResult
     const res = await fetch(formEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, source: 'landing-demo' }),
+      body: JSON.stringify({ ...data, lang: document.documentElement.lang, source: 'landing-demo' }),
     });
     if (!res.ok) throw new Error(`Error ${res.status}`);
     return { mode: 'sent' };
   }
 
-  const subject = `Solicitud de demo: ${data.restaurant}`;
+  const f = ui.form;
+  const subject = `${f.mailSubject}: ${data.restaurant}`;
   const body = [
-    `Nombre: ${data.name}`,
-    `Restaurante: ${data.restaurant}`,
-    `Email: ${data.email}`,
-    data.phone ? `Teléfono: ${data.phone}` : '',
-    data.message ? `\nMensaje:\n${data.message}` : '',
+    `${f.name}: ${data.name}`,
+    `${f.restaurant}: ${data.restaurant}`,
+    `${f.email}: ${data.email}`,
+    data.phone ? `${f.phone}: ${data.phone}` : '',
+    data.message ? `\n${f.message}:\n${data.message}` : '',
   ]
     .filter(Boolean)
     .join('\n');

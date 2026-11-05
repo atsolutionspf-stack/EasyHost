@@ -11,18 +11,29 @@ npm run build     # versión de producción en /dist
 npm run preview   # previsualiza /dist
 ```
 
+## Idiomas
+
+La web tiene dos versiones con el mismo diseño:
+
+- **Español:** `/` (archivo `index.html`)
+- **Inglés:** `/en/` (archivo `en/index.html`)
+
+Cada archivo de `src/config` tiene los textos de los dos idiomas, en los bloques `es` y `en`. Si cambias un texto en un idioma, cámbialo también en el otro.
+
 ## Dónde cambiar cada cosa
 
 | Qué quieres cambiar | Archivo |
 | --- | --- |
-| **Precios**: planes del TPV (suscripción mensual), packs de creación de web (pago único, con cuota mensual opcional) y servicios adicionales | `src/config/plans.ts` |
-| **Funcionalidades** (añadir, quitar o reordenar tarjetas) | `src/config/features.ts` |
+| **Precios** (TPV, packs de web, hora de mantenimiento). Se cambian una sola vez, en el bloque `prices`, y valen para los dos idiomas | `src/config/plans.ts` |
+| **Textos de los packs, del TPV y de los servicios adicionales** | `src/config/plans.ts` (bloques `es` y `en`) |
+| **Funcionalidades** (añadir, quitar o reordenar) | `src/config/features.ts` |
 | **Textos** de hero, problema/solución, pasos, ventajas y CTA final | `src/config/content.ts` |
+| **Botones, formulario, menú y mockup del panel** | `src/config/ui.ts` |
 | **Navegación, logotipo, contacto, enlaces legales y destino del formulario** | `src/config/site.ts` |
 | **Colores, tipografía y espaciados** | `src/styles/tokens.css` |
-| **SEO** (title, description, Open Graph, dominio) | `index.html` |
-| **Imagen para redes sociales** (1200×630) | `public/og-image.png` |
-| **Páginas legales** | `public/aviso-legal/`, `public/politica-de-privacidad/`, `public/politica-de-cookies/` |
+| **SEO** (title, description, Open Graph, dominio) | `index.html` (español) y `en/index.html` (inglés) |
+| **Imagen para redes sociales** (1200×630) | `public/og-image.png` y `public/og-image-en.png` |
+| **Páginas legales** | Español: `public/aviso-legal/`, `public/politica-de-privacidad/`, `public/politica-de-cookies/`. Inglés: `public/en/legal-notice/`, `public/en/privacy-policy/`, `public/en/cookie-policy/` |
 
 ### Placeholders
 

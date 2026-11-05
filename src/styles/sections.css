@@ -1193,7 +1193,7 @@
 /* Packs de web */
 .packs__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-md);
 }
 .pack {
@@ -1326,10 +1326,9 @@
   color: var(--muted);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .packs__grid {
-    grid-template-columns: 1fr;
-    max-width: 30rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 760px) {
@@ -1344,5 +1343,77 @@
   .addon {
     flex-direction: column;
     gap: var(--space-sm);
+  }
+}
+
+/* ---------- Selector de idioma ---------- */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-xs);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+.lang-switch:hover {
+  color: var(--blue);
+}
+.navbar__nav + .navbar__lang {
+  margin-left: calc(var(--space-md) * -1);
+}
+@media (max-width: 960px) {
+  .navbar__nav + .navbar__lang {
+    margin-left: auto;
+  }
+  .navbar__lang + .navbar__cta + .navbar__toggle {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Pack personalizado: botón de contacto en lugar de precio ---------- */
+.pack__unit--top {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+}
+.pack__contact {
+  width: 100%;
+}
+
+/* ---------- TPV: un único plan, tarjeta ancha ---------- */
+.plan--single {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-xl) clamp(var(--space-xl), 1rem + 4vw, 5rem);
+  align-items: start;
+}
+.plan--single .plan__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.plan--single .plan__cta {
+  width: auto;
+  margin-top: var(--space-lg);
+}
+.plan__features--columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0 var(--space-xl);
+  margin: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+@media (max-width: 860px) {
+  .plan--single {
+    grid-template-columns: 1fr;
+  }
+  .plan--single .plan__cta {
+    width: 100%;
+  }
+  .plan__features--columns {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--rule-on-ink);
   }
 }

@@ -1,26 +1,33 @@
 import { Check } from 'lucide-react';
-import { addons, plans, pricingConfig, webPacks, type Plan, type WebPack } from '../config/plans';
+import { addons, pricingConfig, tpvPlan, webPacks, type WebPack } from '../config/plans';
 import { pricingContent } from '../config/content';
+import { ui } from '../config/ui';
+import { formatMoney, lang } from '../i18n';
 import { useReveal } from '../hooks/useReveal';
 import { SectionHeader } from './ui/SectionHeader';
 import { Button } from './ui/Button';
-import { ConfigText } from './ui/Placeholder';
+import { ConfigText, isPlaceholder } from './ui/Placeholder';
 
 /**
  * Sección de precios. No contiene datos: todo se lee de src/config/plans.ts.
- * Tres bloques: planes del TPV, packs de web y servicios adicionales.
+ * Tres bloques: packs de web, TPV (suscripción) y servicios adicionales.
  */
 
-const { currency } = pricingConfig;
-
-/** Precio del plan del TPV más barato, para el "desde X €/mes" del pack con TPV. */
-const cheapestTpvPrice = (() => {
-  const numbers = plans
-    .map((p) => Number(p.price.replace(',', '.')))
-    .filter((n) => Number.isFinite(n));
-  if (numbers.length === 0) return null;
-  return String(Math.min(...numbers)).replace('.', ',');
-})();
+/** Importe con el símbolo € en la posición de cada idioma ("40 €" / "€40"). */
+function Money({ value }: { value: string }) {
+  if (isPlaceholder(value)) {
+    return lang === 'en' ? (
+      <>
+        €<ConfigText value={value} />
+      </>
+    ) : (
+      <>
+        <ConfigText value={value} /> €
+      </>
+    );
+  }
+  return <>{formatMoney(value)}</>;
+}
 
 function GroupHeader({ id, title, intro }: { id: string; title: string; intro: string }) {
   return (
@@ -33,73 +40,36 @@ function GroupHeader({ id, title, intro }: { id: string; title: string; intro: s
   );
 }
 
-function PlanCard({ plan }: { plan: Plan }) {
-  const featured = Boolean(plan.highlighted);
-  return (
-    <article className={`plan ${featured ? 'plan--featured' : ''}`} aria-labelledby={`plan-${plan.id}`}>
-      <header className="plan__head">
-        <h4 id={`plan-${plan.id}`} className="plan__name">
-          Plan {plan.name}
-        </h4>
-        {featured && <span className="plan__badge">{pricingConfig.highlightLabel}</span>}
-      </header>
-
-      <p className="plan__price">
-        <span className="plan__amount">
-          <ConfigText value={plan.price} />
-        </span>
-        <span className="plan__currency">{currency}</span>
-        <span className="plan__period">{pricingConfig.period}</span>
-      </p>
-
-      <p className="plan__desc">
-        <ConfigText value={plan.description} />
-      </p>
-
-      <div className="plan__features">
-        {plan.includesPrevious && <p className="plan__includes">{plan.includesPrevious}</p>}
-        <ul>
-          {plan.features.map((feature, i) => (
-            <li key={`${plan.id}-${i}`}>
-              <Check size={17} strokeWidth={2.25} aria-hidden="true" />
-              <ConfigText value={feature} />
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <Button href={plan.cta.href} variant={featured ? 'primary' : 'secondary'} className="plan__cta">
-        {plan.cta.label}
-        <span className="visually-hidden"> sobre el Plan {plan.name}</span>
-      </Button>
-    </article>
-  );
-}
-
 function PackCard({ pack }: { pack: WebPack }) {
+  const { web } = pricingConfig;
+  const custom = pack.price === null;
+
   return (
-    <article className="pack" aria-labelledby={`pack-${pack.id}`}>
+    <article className={`pack ${custom ? 'pack--custom' : ''}`} aria-labelledby={`pack-${pack.id}`}>
       <h4 id={`pack-${pack.id}`} className="pack__name">
         {pack.name}
       </h4>
 
       <div className="pack__price">
-        {pack.price === null ? (
-          <p className="pack__amount pack__amount--quote">A presupuestar</p>
+        {custom ? (
+          <>
+            <p className="pack__unit pack__unit--top">{web.customPriceLabel}</p>
+            <Button href={pack.cta.href} className="pack__contact">
+              {pack.cta.label}
+            </Button>
+          </>
         ) : (
           <>
             <p className="pack__amount">
-              <ConfigText value={pack.price} /> {currency}
-              <span className="pack__unit">{pricingConfig.web.oneOffLabel}</span>
+              <Money value={pack.price!} />
+              <span className="pack__unit">{web.oneOffLabel}</span>
             </p>
             {pack.includesTpv ? (
               <a href="#planes-tpv" className="pack__monthly">
-                {cheapestTpvPrice
-                  ? pricingConfig.web.subscriptionLabel.replace('{precio}', cheapestTpvPrice)
-                  : '+ suscripción del TPV'}
+                {web.subscriptionLabel.replace('{precio}', formatMoney(tpvPlan.price))}
               </a>
             ) : (
-              <p className="pack__nosub">{pricingConfig.web.noSubscriptionLabel}</p>
+              <p className="pack__nosub">{web.noSubscriptionLabel}</p>
             )}
           </>
         )}
@@ -118,18 +88,59 @@ function PackCard({ pack }: { pack: WebPack }) {
         </ul>
       )}
 
-      <a href={pack.cta.href} className="pack__cta">
-        {pack.cta.label}
-        <span className="visually-hidden"> sobre el pack {pack.name}</span>
-      </a>
+      {!custom && (
+        <a href={pack.cta.href} className="pack__cta">
+          {pack.cta.label}
+          <span className="visually-hidden">
+            {' '}
+            {ui.pricing.about} {pack.name}
+          </span>
+        </a>
+      )}
+    </article>
+  );
+}
+
+function TpvCard() {
+  const plan = tpvPlan;
+  return (
+    <article className="plan plan--featured plan--single" aria-labelledby="plan-tpv">
+      <div className="plan__summary">
+        <h4 id="plan-tpv" className="plan__name">
+          {plan.name}
+        </h4>
+        <p className="plan__price">
+          <span className="plan__amount">
+            <Money value={plan.price} />
+          </span>
+          <span className="plan__period">{pricingConfig.period}</span>
+        </p>
+        <p className="plan__desc">{plan.description}</p>
+        <Button href={plan.cta.href} className="plan__cta">
+          {plan.cta.label}
+          <span className="visually-hidden">
+            {' '}
+            {ui.pricing.about} {plan.name}
+          </span>
+        </Button>
+      </div>
+      <ul className="plan__features plan__features--columns">
+        {plan.features.map((feature) => (
+          <li key={feature}>
+            <Check size={17} strokeWidth={2.25} aria-hidden="true" />
+            {feature}
+          </li>
+        ))}
+      </ul>
     </article>
   );
 }
 
 export function Pricing() {
-  const tpvRef = useReveal<HTMLDivElement>();
   const webRef = useReveal<HTMLDivElement>();
+  const tpvRef = useReveal<HTMLDivElement>();
   const addonsRef = useReveal<HTMLDivElement>();
+  const { web, tpv } = pricingConfig;
 
   return (
     <section id="precios" className="section pricing" aria-labelledby="pricing-title">
@@ -137,7 +148,7 @@ export function Pricing() {
         <SectionHeader id="pricing-title" title={pricingContent.title} intro={pricingContent.intro} />
 
         <div ref={webRef} className="price-group reveal" role="group" aria-labelledby="group-web">
-          <GroupHeader id="group-web" title={pricingConfig.web.title} intro={pricingConfig.web.intro} />
+          <GroupHeader id="group-web" title={web.title} intro={web.intro} />
           <div className="packs__grid">
             {webPacks.map((pack) => (
               <PackCard key={pack.id} pack={pack} />
@@ -145,20 +156,10 @@ export function Pricing() {
           </div>
         </div>
 
-        <div
-          ref={tpvRef}
-          id="planes-tpv"
-          className="price-group reveal"
-          role="group"
-          aria-labelledby="group-tpv"
-        >
-          <GroupHeader id="group-tpv" title={pricingConfig.tpv.title} intro={pricingConfig.tpv.intro} />
-          <div className="pricing__grid">
-            {plans.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
-            ))}
-          </div>
-          <p className="pricing__note">{pricingConfig.tpv.note}</p>
+        <div ref={tpvRef} id="planes-tpv" className="price-group reveal" role="group" aria-labelledby="group-tpv">
+          <GroupHeader id="group-tpv" title={tpv.title} intro={tpv.intro} />
+          <TpvCard />
+          <p className="pricing__note">{tpv.note}</p>
         </div>
 
         {addons.length > 0 && (
@@ -172,7 +173,7 @@ export function Pricing() {
                     <p className="addon__desc">{addon.description}</p>
                   </div>
                   <p className="addon__price">
-                    <ConfigText value={addon.price} /> {currency}
+                    <Money value={addon.price} />
                     <span>{addon.unit}</span>
                   </p>
                 </li>

@@ -1,4 +1,5 @@
 import { siteConfig } from '../../config/site';
+import { ui } from '../../config/ui';
 
 /**
  * Logotipo. Si `siteConfig.brand.logoSrc` tiene una ruta, muestra esa imagen;
@@ -8,7 +9,7 @@ export function Logo({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const { name, logoSrc } = siteConfig.brand;
 
   return (
-    <a href="#inicio" className={`logo logo--${tone}`} aria-label={`${name}, ir al inicio`}>
+    <a href="#inicio" className={`logo logo--${tone}`} aria-label={`${name}, ${ui.nav.goHome}`}>
       {logoSrc ? (
         <img src={logoSrc} alt={name} height={32} />
       ) : (

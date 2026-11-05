@@ -7,12 +7,13 @@ import { Pricing } from './components/Pricing';
 import { Benefits } from './components/Benefits';
 import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
+import { ui } from './config/ui';
 
 export default function App() {
   return (
     <>
       <a href="#main" className="skip-link">
-        Saltar al contenido
+        {ui.skipLink}
       </a>
       <Navbar />
       <main id="main">
