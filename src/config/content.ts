@@ -158,13 +158,11 @@ export const stepsContent = pick({
 export const pricingContent = pick({
   es: {
     title: 'Precios claros, sin sorpresas.',
-    intro:
-      'Tu web con un pago único y, si incluye el TPV, su suscripción mensual. Ayuda extra solo cuando la necesites. Si tienes dudas, te ayudamos a decidir.',
+    intro: 'Elige el plan del TPV que mejor encaja con tu restaurante. Si tienes dudas, te ayudamos a decidir.',
   },
   en: {
     title: 'Clear pricing, no surprises.',
-    intro:
-      'Your website for a one-off payment and, if it includes the POS, its monthly subscription. Extra help only when you need it. Not sure? We’ll help you choose.',
+    intro: 'Choose the POS plan that suits your restaurant best. Not sure? We’ll help you choose.',
   },
 });
 
