@@ -53,7 +53,7 @@ export const plans: Plan[] = [
   {
     id: 'basico',
     name: 'Básico',
-    price: '[Precio]',
+    price: '15',
     description: 'Lo esencial para llevar la sala, las reservas y la caja del día.',
     features: ['TPV', 'Plano de salas', 'Reservas', 'Comandero', 'Cierre diario'],
     cta: { label: 'Solicitar información', href: '#contacto' },
@@ -61,7 +61,7 @@ export const plans: Plan[] = [
   {
     id: 'profesional',
     name: 'Profesional',
-    price: '[Precio]',
+    price: '25',
     description: 'Sala y cocina conectadas, pedidos online y Verifactu.',
     includesPrevious: 'Todo lo del Plan Básico, más:',
     features: [
@@ -78,7 +78,7 @@ export const plans: Plan[] = [
   {
     id: 'premium',
     name: 'Premium',
-    price: '[Precio]',
+    price: '30',
     description: 'Para quien gestiona varios locales y quiere el control completo.',
     includesPrevious: 'Todo lo del Plan Profesional, más:',
     features: ['Multi-restaurante', 'Control de stock', 'CRM', 'Analítica completa'],
