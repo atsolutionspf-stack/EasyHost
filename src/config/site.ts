@@ -13,7 +13,7 @@ export const siteConfig = {
      */
     logoSrc: null as string | null,
     tagline:
-      'Software de gestión de reservas y pedidos online para restaurantes, bares, cafeterías y negocios de hostelería.',
+      'TPV para restaurantes, bares, cafeterías y negocios de hostelería: sala, cocina, reservas, pedidos online y cierre de caja.',
   },
 
   /** Navegación principal. `href` apunta al id de cada sección. */

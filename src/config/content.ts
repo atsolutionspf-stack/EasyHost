@@ -8,9 +8,9 @@ export const heroContent = {
   title: 'Gestiona tu restaurante de forma más sencilla.',
   lead: 'Más reservas, más pedidos y menos complicaciones.',
   subtitle:
-    'Centraliza las reservas y los pedidos online de tu restaurante en una única plataforma. Automatiza procesos, ahorra tiempo y ofrece una mejor experiencia a tus clientes.',
+    'EasyHost es el TPV que reúne la sala, la cocina, las reservas, los pedidos online y el cierre de caja en una única plataforma. Ahorra tiempo y ofrece una mejor experiencia a tus clientes.',
   secondaryCta: { label: 'Descubrir funcionalidades', href: '#funcionalidades' },
-  audience: 'Para restaurantes, bares, cafeterías y negocios de hostelería.',
+  audience: 'TPV para restaurantes, bares, cafeterías y negocios de hostelería.',
   mockupCaption: 'Vista ilustrativa del panel de EasyHost',
 };
 
@@ -43,10 +43,10 @@ export const problemContent = {
     },
   ] satisfies TitleText[],
   solution: {
-    title: 'EasyHost lo reúne todo en un único panel.',
-    text: 'Reservas, pedidos online y la carta de tu restaurante en una misma plataforma, pensada para usarla sin conocimientos técnicos.',
+    title: 'EasyHost lo reúne todo en un único sistema.',
+    text: 'El TPV, la cocina, las reservas y los pedidos online en una misma plataforma, pensada para usarla sin conocimientos técnicos.',
     points: [
-      'Las reservas y los pedidos llegan a un solo lugar.',
+      'La sala, la cocina, las reservas y los pedidos trabajan conectados.',
       'Tus clientes reservan y piden desde tu propia web.',
       'Tú lo organizas todo desde el móvil, la tablet o el ordenador.',
     ],
@@ -54,8 +54,8 @@ export const problemContent = {
 };
 
 export const featuresContent = {
-  title: 'Todo lo que necesitas para gestionar reservas y pedidos.',
-  intro: 'Herramientas sencillas para el día a día de tu restaurante, reunidas en una sola plataforma.',
+  title: 'Todo lo que necesitas para llevar tu restaurante.',
+  intro: 'Del TPV de sala al cierre de caja, en una sola plataforma. Lo que incluye cada plan lo tienes en Precios.',
 };
 
 export const stepsContent = {

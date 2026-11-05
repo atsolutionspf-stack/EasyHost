@@ -3,9 +3,10 @@
  * ---------------
  * Añade, quita o reordena elementos de este array y la sección se adapta sola.
  * Los iconos vienen de https://lucide.dev (importa el que necesites).
+ * Qué incluye cada plan se edita aparte, en plans.ts.
  */
 import type { LucideIcon } from 'lucide-react';
-import { CalendarCheck, ShoppingBag, LayoutDashboard, Globe } from 'lucide-react';
+import { UtensilsCrossed, CalendarCheck, ShoppingBag, Receipt, ChartColumn, Globe } from 'lucide-react';
 
 export type Feature = {
   id: string;
@@ -16,6 +17,19 @@ export type Feature = {
 };
 
 export const features: Feature[] = [
+  {
+    id: 'sala-cocina',
+    icon: UtensilsCrossed,
+    title: 'TPV de sala y cocina',
+    description: 'Toma comandas en sala y envíalas directamente a cocina.',
+    items: [
+      'TPV',
+      'Plano de salas',
+      'Comandero y comandero QR',
+      'KDS: pantalla de cocina',
+      'Modo offline',
+    ],
+  },
   {
     id: 'reservas',
     icon: CalendarCheck,
@@ -41,15 +55,18 @@ export const features: Feature[] = [
     ],
   },
   {
-    id: 'panel',
-    icon: LayoutDashboard,
-    title: 'Panel de administración',
-    description: 'El día a día de tu restaurante, desde una sola pantalla.',
-    items: [
-      'Toda la información centralizada',
-      'Gestión sencilla del restaurante',
-      'Control de las operaciones desde un único lugar',
-    ],
+    id: 'caja',
+    icon: Receipt,
+    title: 'Caja y Verifactu',
+    description: 'El cierre del día y Verifactu, en el mismo sistema.',
+    items: ['Cierre diario de caja', 'Verifactu'],
+  },
+  {
+    id: 'control',
+    icon: ChartColumn,
+    title: 'Control del negocio',
+    description: 'Datos y herramientas para decidir mejor.',
+    items: ['Analítica básica y completa', 'Control de stock', 'CRM de clientes', 'Multi-restaurante'],
   },
   {
     id: 'presencia',

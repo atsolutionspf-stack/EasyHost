@@ -1,4 +1,4 @@
-import { CalendarCheck, ShoppingBag, BookOpen, Users, LayoutDashboard, Bell } from 'lucide-react';
+import { CalendarCheck, ShoppingBag, ChefHat, Receipt, LayoutGrid, Bell } from 'lucide-react';
 
 /**
  * Mockup ilustrativo del panel, construido en HTML/CSS (sin imágenes pesadas).
@@ -22,11 +22,11 @@ const statusLabel: Record<Status, string> = {
 };
 
 const nav = [
-  { icon: LayoutDashboard, label: 'Resumen' },
+  { icon: LayoutGrid, label: 'Sala' },
   { icon: CalendarCheck, label: 'Reservas', active: true },
   { icon: ShoppingBag, label: 'Pedidos' },
-  { icon: BookOpen, label: 'Carta' },
-  { icon: Users, label: 'Clientes' },
+  { icon: ChefHat, label: 'Cocina' },
+  { icon: Receipt, label: 'Caja' },
 ];
 
 export function DashboardMockup() {
