@@ -33,15 +33,18 @@ export const pricingConfig = {
   currency: '€',
   period: '/mes',
   highlightLabel: 'Recomendado',
-  tpv: {
-    title: 'Planes del TPV',
-    intro: 'Suscripción mensual. Elige el plan según lo que necesite tu restaurante.',
-    note: 'Los planes del TPV se contratan mediante suscripción mensual.',
-  },
   web: {
     title: 'Creación de tu web',
-    intro: 'Pago único. Solo el pack Profesional, que se conecta con el TPV EasyHost, incluye además una cuota mensual.',
+    intro: 'Simple y Avanzada se pagan una sola vez, sin suscripción. El pack Profesional incluye el TPV: pago único más la suscripción mensual del TPV.',
     oneOffLabel: 'pago único',
+    noSubscriptionLabel: 'Sin suscripción',
+    /** Texto de la suscripción del pack que incluye el TPV. {precio} se sustituye por el plan más barato. */
+    subscriptionLabel: '+ suscripción del TPV desde {precio} €/mes',
+  },
+  tpv: {
+    title: 'Planes del TPV',
+    intro: 'Suscripción mensual del TPV EasyHost y su mantenimiento. Es la que se suma al pago único del pack Profesional.',
+    note: 'Los planes del TPV se contratan mediante suscripción mensual.',
   },
   addons: {
     title: 'Servicios adicionales',
@@ -87,7 +90,7 @@ export const plans: Plan[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* 2. Packs de creación de web (pago único)                            */
+/* 2. Packs de creación de web                                         */
 /* ------------------------------------------------------------------ */
 
 export type WebPack = {
@@ -95,8 +98,12 @@ export type WebPack = {
   name: string;
   /** Pago único. `null` = "A presupuestar". */
   price: string | null;
-  /** Cuota mensual adicional. Déjalo sin poner si el pack es solo pago único. */
-  monthly?: string;
+  /**
+   * true = además del pago único lleva la suscripción mensual del TPV
+   * (se muestra "desde X €/mes" con el precio del plan más barato).
+   * false = solo pago único, sin suscripción.
+   */
+  includesTpv: boolean;
   description: string;
   features: string[];
   cta: { label: string; href: string };
@@ -107,6 +114,7 @@ export const webPacks: WebPack[] = [
     id: 'simple',
     name: 'Simple',
     price: '390',
+    includesTpv: false,
     description: 'Una web de una sola página (One Page) con la información de tu restaurante.',
     features: ['Web One Page'],
     cta: { label: 'Solicitar información', href: '#contacto' },
@@ -115,26 +123,19 @@ export const webPacks: WebPack[] = [
     id: 'avanzada',
     name: 'Avanzada',
     price: '590',
-    description: 'Tu web con reservas y pedidos online.',
-    features: ['Reservas online', 'Pedidos online'],
+    includesTpv: false,
+    description: 'Tu web con reservas y pedidos online, y más ventajas para tus clientes.',
+    features: ['Reservas online', 'Pedidos online', 'Carta digital'],
     cta: { label: 'Solicitar información', href: '#contacto' },
   },
   {
     id: 'profesional',
     name: 'Profesional',
     price: '890',
-    monthly: '[Cuota]',
-    description: 'Tu web conectada con el TPV EasyHost.',
-    features: ['Conexión con el TPV', 'Soporte prioritario'],
+    includesTpv: true,
+    description: 'Tu web con el TPV EasyHost y el CRM completos, todo conectado.',
+    features: ['TPV EasyHost conectado a tu web', 'CRM completo', 'Soporte prioritario'],
     cta: { label: 'Solicitar información', href: '#contacto' },
-  },
-  {
-    id: 'personalizada',
-    name: 'Personalizada',
-    price: null,
-    description: 'Para proyectos con necesidades propias. Lo hablamos y te preparamos un presupuesto.',
-    features: [],
-    cta: { label: 'Pedir presupuesto', href: '#contacto' },
   },
 ];
 

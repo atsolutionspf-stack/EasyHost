@@ -79,7 +79,7 @@ export const stepsContent = {
 
 export const pricingContent = {
   title: 'Precios claros, sin sorpresas.',
-  intro: 'El TPV por suscripción mensual, tu web con un pago único y ayuda extra solo cuando la necesites. Si tienes dudas, te ayudamos a decidir.',
+  intro: 'Tu web con un pago único y, si incluye el TPV, su suscripción mensual. Ayuda extra solo cuando la necesites. Si tienes dudas, te ayudamos a decidir.',
 };
 
 export const benefitsContent = {

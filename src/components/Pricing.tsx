@@ -13,6 +13,15 @@ import { ConfigText } from './ui/Placeholder';
 
 const { currency } = pricingConfig;
 
+/** Precio del plan del TPV más barato, para el "desde X €/mes" del pack con TPV. */
+const cheapestTpvPrice = (() => {
+  const numbers = plans
+    .map((p) => Number(p.price.replace(',', '.')))
+    .filter((n) => Number.isFinite(n));
+  if (numbers.length === 0) return null;
+  return String(Math.min(...numbers)).replace('.', ',');
+})();
+
 function GroupHeader({ id, title, intro }: { id: string; title: string; intro: string }) {
   return (
     <header className="price-group__head">
@@ -83,11 +92,14 @@ function PackCard({ pack }: { pack: WebPack }) {
               <ConfigText value={pack.price} /> {currency}
               <span className="pack__unit">{pricingConfig.web.oneOffLabel}</span>
             </p>
-            {pack.monthly && (
-              <p className="pack__monthly">
-                + <ConfigText value={pack.monthly} /> {currency}
-                {pricingConfig.period}
-              </p>
+            {pack.includesTpv ? (
+              <a href="#planes-tpv" className="pack__monthly">
+                {cheapestTpvPrice
+                  ? pricingConfig.web.subscriptionLabel.replace('{precio}', cheapestTpvPrice)
+                  : '+ suscripción del TPV'}
+              </a>
+            ) : (
+              <p className="pack__nosub">{pricingConfig.web.noSubscriptionLabel}</p>
             )}
           </>
         )}
@@ -124,16 +136,6 @@ export function Pricing() {
       <div className="container">
         <SectionHeader id="pricing-title" title={pricingContent.title} intro={pricingContent.intro} />
 
-        <div ref={tpvRef} className="price-group reveal" role="group" aria-labelledby="group-tpv">
-          <GroupHeader id="group-tpv" title={pricingConfig.tpv.title} intro={pricingConfig.tpv.intro} />
-          <div className="pricing__grid">
-            {plans.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
-            ))}
-          </div>
-          <p className="pricing__note">{pricingConfig.tpv.note}</p>
-        </div>
-
         <div ref={webRef} className="price-group reveal" role="group" aria-labelledby="group-web">
           <GroupHeader id="group-web" title={pricingConfig.web.title} intro={pricingConfig.web.intro} />
           <div className="packs__grid">
@@ -141,6 +143,22 @@ export function Pricing() {
               <PackCard key={pack.id} pack={pack} />
             ))}
           </div>
+        </div>
+
+        <div
+          ref={tpvRef}
+          id="planes-tpv"
+          className="price-group reveal"
+          role="group"
+          aria-labelledby="group-tpv"
+        >
+          <GroupHeader id="group-tpv" title={pricingConfig.tpv.title} intro={pricingConfig.tpv.intro} />
+          <div className="pricing__grid">
+            {plans.map((plan) => (
+              <PlanCard key={plan.id} plan={plan} />
+            ))}
+          </div>
+          <p className="pricing__note">{pricingConfig.tpv.note}</p>
         </div>
 
         {addons.length > 0 && (
