@@ -12,19 +12,21 @@ export type TitleText = { title: string; text: string };
 export const heroContent = pick({
   es: {
     audience: 'TPV y CRM para comercios, hostelería y servicios',
-    title: 'Vende, cobra y conoce a tus clientes desde un solo sitio.',
-    lead: 'El TPV y el CRM de tu negocio, conectados.',
+    title: 'Todo tu negocio, conectado en un solo lugar.',
+    lead: 'Vende, cobra, reserva y conoce a tus clientes desde una sola plataforma.',
     subtitle:
-      'Clientia reúne las ventas, la caja, el stock, las reservas, los pedidos online y la ficha de cada cliente en una única plataforma. Menos herramientas sueltas, más tiempo para atender.',
+      'Clientia reúne el TPV, la caja, las reservas, los pedidos online, el stock y la ficha de cada cliente. Sin herramientas desconectadas ni varias suscripciones.',
+    priceNote: 'Desde {precio}/mes, sin IVA.',
     secondaryCta: { label: 'Ver funcionalidades', href: '#funcionalidades' },
     mockupCaption: 'Vista ilustrativa de Clientia con datos de ejemplo',
   },
   en: {
     audience: 'POS and CRM for shops, hospitality and services',
-    title: 'Sell, take payments and know your customers from one place.',
-    lead: 'Your business’s POS and CRM, connected.',
+    title: 'Your whole business, connected in one place.',
+    lead: 'Sell, take payments, manage bookings and know your customers from a single platform.',
     subtitle:
-      'Clientia brings sales, cash-up, stock, bookings, online orders and every customer’s profile together on one platform. Fewer scattered tools, more time to serve.',
+      'Clientia brings together your POS, till, bookings, online orders, stock and every customer’s profile. No disconnected tools, no stack of subscriptions.',
+    priceNote: 'From {precio}/month, excluding VAT.',
     secondaryCta: { label: 'See the features', href: '#funcionalidades' },
     mockupCaption: 'Illustrative view of Clientia with sample data',
   },
@@ -177,66 +179,72 @@ export const stepsContent = pick({
 export const pricingContent = pick({
   es: {
     title: 'Precios claros, sin sorpresas.',
-    intro: 'Elige el plan que mejor encaja con tu negocio. Si tienes dudas, te ayudamos a decidir.',
+    intro: 'Essential ya incluye lo necesario para dejar tus otras suscripciones. Professional añade control y automatización, y Custom se adapta a cadenas y grupos.',
   },
   en: {
     title: 'Clear pricing, no surprises.',
-    intro: 'Choose the plan that suits your business best. Not sure? We’ll help you choose.',
+    intro: 'Essential already covers what you need to drop your other subscriptions. Professional adds control and automation, and Custom adapts to chains and groups.',
   },
 });
 
 export const benefitsContent = pick({
   es: {
-    title: 'Menos tiempo gestionando. Más tiempo para tus clientes.',
-    intro: 'Lo que cambia en tu día a día cuando todo está en un mismo lugar.',
+    title: 'Sencillo, completo y asequible.',
+    intro: 'Las tres promesas que guían Clientia, en el producto y en el trato.',
     benefits: [
       {
-        title: 'Ahorra tiempo en la gestión diaria',
-        text: 'Menos apuntes a mano, menos programas sueltos y menos tareas repetitivas.',
+        title: 'Sencillo',
+        text: 'Fácil de aprender y de usar en plena jornada, sin conocimientos técnicos.',
       },
       {
-        title: 'Conoce mejor a tus clientes',
-        text: 'Cada cliente con su ficha, para cuidar a los que vuelven.',
+        title: 'Completo',
+        text: 'Ventas, caja, reservas, pedidos, stock y clientes en una única plataforma conectada.',
       },
       {
-        title: 'Cierra la caja sin sustos',
-        text: 'Las ventas del día, ordenadas y listas para cuadrar.',
-      },
-      {
-        title: 'Recibe reservas y pedidos directamente',
-        text: 'Llegan a tu panel desde tu propia web, sin intermediarios.',
-      },
-      {
-        title: 'Todo tu negocio en un mismo sitio',
-        text: 'Ventas, stock, pedidos y clientes, desde cualquier dispositivo.',
+        title: 'Asequible',
+        text: 'Costes claros desde el primer día, y add-ons solo si los necesitas.',
       },
     ] satisfies TitleText[],
   },
   en: {
-    title: 'Less time on admin. More time for your customers.',
-    intro: 'What changes day to day when everything is in one place.',
+    title: 'Simple, complete and affordable.',
+    intro: 'The three promises behind Clientia, in the product and in how we work with you.',
     benefits: [
       {
-        title: 'Save time on daily management',
-        text: 'Fewer handwritten notes, fewer separate apps and fewer repetitive tasks.',
+        title: 'Simple',
+        text: 'Easy to learn and to use in the middle of a busy day, no technical knowledge needed.',
       },
       {
-        title: 'Get to know your customers',
-        text: 'Every customer has a profile, so you can look after the ones who come back.',
+        title: 'Complete',
+        text: 'Sales, till, bookings, orders, stock and customers on one connected platform.',
       },
       {
-        title: 'Cash up without surprises',
-        text: 'The day’s sales, organised and ready to balance.',
-      },
-      {
-        title: 'Receive bookings and orders directly',
-        text: 'They reach your dashboard from your own website, with no middlemen.',
-      },
-      {
-        title: 'Your whole business in one place',
-        text: 'Sales, stock, orders and customers, from any device.',
+        title: 'Affordable',
+        text: 'Clear costs from day one, and add-ons only if you need them.',
       },
     ] satisfies TitleText[],
+  },
+});
+
+/** Sección «una sola cuota en lugar de varias suscripciones». */
+export const replaceContent = pick({
+  es: {
+    title: 'Una sola cuota en lugar de varias suscripciones.',
+    text: 'Muchos negocios pagan por separado un TPV, un sistema de reservas, una herramienta de pedidos online y un programa de informes. Con Clientia Essential lo tienes todo conectado en una sola plataforma.',
+    tools: ['TPV', 'Reservas', 'Pedidos online', 'Informes y analíticas'],
+    result: 'Clientia Essential',
+    priceLabel: '{precio}/mes',
+    note: 'Te ayudamos a comprobar que cubre lo que necesita tu negocio antes de cambiar.',
+    cta: { label: 'Ver planes', href: '#precios' },
+  },
+  en: {
+    title: 'One subscription instead of several.',
+    text: 'Many businesses pay separately for a POS, a booking system, an online ordering tool and a reporting app. With Clientia Essential, it’s all connected on a single platform.',
+    tools: ['POS', 'Bookings', 'Online orders', 'Reports and analytics'],
+    result: 'Clientia Essential',
+    priceLabel: '{precio}/month',
+    note: 'We’ll help you check it covers what your business needs before you switch.',
+    cta: { label: 'See plans', href: '#precios' },
   },
 });
 

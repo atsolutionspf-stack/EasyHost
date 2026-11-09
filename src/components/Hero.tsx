@@ -2,6 +2,8 @@ import { heroContent } from '../config/content';
 import { siteConfig } from '../config/site';
 import { Button } from './ui/Button';
 import { DashboardMockup } from './DashboardMockup';
+import { prices } from '../config/plans';
+import { formatMoney } from '../i18n';
 
 /** Portada: titular grande, propuesta y botones; debajo, el producto a todo el ancho. */
 export function Hero() {
@@ -26,6 +28,7 @@ export function Hero() {
                 {heroContent.secondaryCta.label}
               </Button>
             </div>
+            <p className="hero__price">{heroContent.priceNote.replace('{precio}', formatMoney(prices.essential))}</p>
           </div>
         </div>
 

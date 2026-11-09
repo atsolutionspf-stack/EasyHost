@@ -1,9 +1,9 @@
-import { Check } from 'lucide-react';
 import { features, type Feature } from '../config/features';
 import { featuresContent } from '../config/content';
 import { ui } from '../config/ui';
 import { useReveal } from '../hooks/useReveal';
 import { SectionHeader } from './ui/SectionHeader';
+import { FeatureLine } from './Pricing';
 
 /** Mini vistas ilustrativas para los bloques destacados del bento. */
 function MiniTicket() {
@@ -62,11 +62,8 @@ function FeatureCard({ feature }: { feature: Feature }) {
         </h3>
         <p className="bento__desc">{feature.description}</p>
         <ul className="bento__items">
-          {feature.items.map((item) => (
-            <li key={item}>
-              <Check size={16} strokeWidth={2.25} aria-hidden="true" />
-              {item}
-            </li>
+          {feature.items.map((item, i) => (
+            <FeatureLine key={`${feature.id}-${i}`} item={item} />
           ))}
         </ul>
       </div>

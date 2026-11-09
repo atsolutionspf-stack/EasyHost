@@ -4,6 +4,7 @@ import { Sectors } from './components/Sectors';
 import { ProblemSolution } from './components/ProblemSolution';
 import { Features } from './components/Features';
 import { HowItWorks } from './components/HowItWorks';
+import { ReplaceSubscriptions } from './components/ReplaceSubscriptions';
 import { Pricing } from './components/Pricing';
 import { Benefits } from './components/Benefits';
 import { FinalCta } from './components/FinalCta';
@@ -23,6 +24,7 @@ export default function App() {
         <ProblemSolution />
         <Features />
         <HowItWorks />
+        <ReplaceSubscriptions />
         <Pricing />
         <Benefits />
         <FinalCta />

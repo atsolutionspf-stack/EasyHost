@@ -35,6 +35,10 @@ Cada archivo de `src/config` tiene los textos de los dos idiomas, en los bloques
 | **Imagen para redes sociales** (1200×630) | `public/og-image.png` y `public/og-image-en.png` |
 | **Páginas legales** | Español: `public/aviso-legal/`, `public/politica-de-privacidad/`, `public/politica-de-cookies/`. Inglés: `public/en/legal-notice/`, `public/en/privacy-policy/`, `public/en/cookie-policy/` |
 
+### Funcionalidades «Próximamente»
+
+En `src/config/plans.ts` y `src/config/features.ts`, una funcionalidad escrita como `{ label: 'Integraciones de delivery', soon: true }` se muestra con la etiqueta «Próximamente». Cuando esté lista y validada, quita `soon: true`. No anuncies como disponible nada que todavía no funcione (por ejemplo, VeriFactu o las integraciones con plataformas externas).
+
 ### Placeholders
 
 Cualquier texto escrito entre corchetes, como `[Precio]` o `[Teléfono de contacto]`, se muestra en la web con un borde discontinuo, para que no se publique por error. Al escribir el valor real, el borde desaparece.

@@ -11,8 +11,10 @@
 import type { LucideIcon } from 'lucide-react';
 import { ScanBarcode, Users, CalendarCheck, ShoppingBag, Boxes, UtensilsCrossed } from 'lucide-react';
 import { lang, type Lang } from '../i18n';
+import type { FeatureItem } from './plans';
 
-type FeatureText = { title: string; description: string; items: string[] };
+/** Una funcionalidad { label, soon: true } se muestra con la etiqueta «Próximamente». */
+type FeatureText = { title: string; description: string; items: FeatureItem[] };
 
 export type Feature = {
   id: string;
@@ -31,12 +33,12 @@ const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>
     es: {
       title: 'TPV y caja',
       description: 'Cobra rápido en el mostrador y cierra la caja del día sin sustos.',
-      items: ['TPV', 'Cierre diario de caja', 'Verifactu', 'Modo offline'],
+      items: ['TPV y cobros', 'Caja y cierre diario', 'Modo offline', 'Usuarios y permisos', { label: 'Facturación VeriFactu', soon: true }],
     },
     en: {
       title: 'POS and cash-up',
       description: 'Take payments quickly at the counter and close the day without surprises.',
-      items: ['POS', 'Daily cash-up', 'Verifactu (Spanish e-invoicing compliance)', 'Offline mode'],
+      items: ['POS and payments', 'Till and daily cash-up', 'Offline mode', 'Users and permissions', { label: 'VeriFactu invoicing (Spanish compliance)', soon: true }],
     },
   },
   {
@@ -46,12 +48,12 @@ const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>
     es: {
       title: 'CRM de clientes',
       description: 'La ficha de cada cliente, para cuidar a los que vuelven.',
-      items: ['CRM', 'Analítica de ventas'],
+      items: ['CRM', 'Analíticas de ventas y pedidos'],
     },
     en: {
       title: 'Customer CRM',
       description: 'A profile for every customer, so you can look after your regulars.',
-      items: ['CRM', 'Sales analytics'],
+      items: ['CRM', 'Sales and order analytics'],
     },
   },
   {
@@ -60,12 +62,12 @@ const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>
     es: {
       title: 'Reservas',
       description: 'Todas las reservas del día, ordenadas y a la vista.',
-      items: ['Organización de reservas', 'Control de horarios', 'Estado de cada reserva'],
+      items: ['Reservas y asignación de mesas', 'Control de horarios', 'Reservas avanzadas en Professional'],
     },
     en: {
       title: 'Bookings',
       description: 'All of today’s bookings, organised and in plain sight.',
-      items: ['Organise bookings', 'Control time slots', 'Status of every booking'],
+      items: ['Bookings and table allocation', 'Control time slots', 'Advanced bookings in Professional'],
     },
   },
   {
@@ -74,26 +76,26 @@ const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>
     es: {
       title: 'Pedidos online',
       description: 'Tu catálogo en internet y los pedidos llegando a un solo sitio.',
-      items: ['Catálogo o carta digital', 'Pedidos desde tu web', 'Productos y categorías'],
+      items: ['Catálogo o carta digital', 'Pedidos desde tu web', { label: 'Integraciones de delivery', soon: true }],
     },
     en: {
       title: 'Online orders',
       description: 'Your catalogue online and every order arriving in one place.',
-      items: ['Digital catalogue or menu', 'Orders from your website', 'Products and categories'],
+      items: ['Digital catalogue or menu', 'Orders from your website', { label: 'Delivery integrations', soon: true }],
     },
   },
   {
     id: 'stock',
     icon: Boxes,
     es: {
-      title: 'Stock y varios locales',
-      description: 'Controla tu inventario y gestiona más de un local.',
-      items: ['Control de stock', 'Multi-local'],
+      title: 'Stock, equipo y locales',
+      description: 'Controla tu inventario, organiza a tu equipo y gestiona hasta 3 locales.',
+      items: ['Stock básico, o avanzado con escandallos', 'Turnos y personal', 'Hasta 3 establecimientos en Professional'],
     },
     en: {
-      title: 'Stock and multiple locations',
-      description: 'Keep track of inventory and manage more than one location.',
-      items: ['Stock control', 'Multi-location'],
+      title: 'Stock, team and locations',
+      description: 'Track inventory, organise your team and manage up to 3 locations.',
+      items: ['Basic stock, or advanced with recipe costing', 'Shifts and staff', 'Up to 3 locations on Professional'],
     },
   },
   {
@@ -103,12 +105,12 @@ const featureList: (Omit<Feature, keyof FeatureText> & Record<Lang, FeatureText>
     es: {
       title: 'Para hostelería',
       description: 'Si tienes bar, restaurante o cafetería, la sala y la cocina también van conectadas.',
-      items: ['Plano de salas', 'Comandero y comandero QR', 'KDS: pantalla de cocina'],
+      items: ['Plano interactivo de mesas', 'Pedidos y comandas por mesa', 'Comandero digital y carta QR', 'KDS: pantalla de cocina'],
     },
     en: {
       title: 'For hospitality',
       description: 'If you run a bar, restaurant or café, the floor and the kitchen are connected too.',
-      items: ['Floor plan', 'Order taking, including QR ordering', 'KDS: kitchen display'],
+      items: ['Interactive floor plan', 'Orders and tickets by table', 'Staff order taking and QR menu', 'KDS: kitchen display'],
     },
   },
 ];

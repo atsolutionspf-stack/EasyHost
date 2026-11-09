@@ -1,41 +1,65 @@
 /**
- * PLANES DEL TPV: DOS SUSCRIPCIONES MENSUALES Y UN PLAN PERSONALIZADO
- * ------------------------------------
- * 1) Para cambiar un PRECIO, cámbialo solo en el bloque `prices` de aquí abajo.
- *    Vale para las dos versiones de la web (español e inglés).
- *    Escribe el número entre comillas y sin el símbolo €: por ejemplo '25'.
- * 2) Para cambiar los TEXTOS de los planes, edita los bloques `es` (español)
- *    y `en` (inglés) más abajo.
+ * PLANES, COMPARATIVA Y ADD-ONS
+ * -----------------------------
+ * 1) PRECIOS: cámbialos solo en el bloque `prices`. Valen para los dos idiomas.
+ *    Escribe el número entre comillas y sin el símbolo €: por ejemplo '19'.
+ * 2) TEXTOS: edita los bloques `es` (español) y `en` (inglés).
+ * 3) «PRÓXIMAMENTE»: una funcionalidad escrita así { label: '…', soon: true }
+ *    se muestra con la etiqueta «Próximamente». Cuando esté lista y validada,
+ *    quita `soon: true` (o escríbela como texto normal entre comillas).
+ *    No anuncies como disponible nada que todavía no funcione.
  *
  * La sección de precios (src/components/Pricing.tsx) se adapta sola.
- * Un texto entre corchetes, como "[Precio]", se ve resaltado como pendiente.
  */
 import { pick } from '../i18n';
 
 /* ================================================================== */
-/* PRECIOS MENSUALES (comunes a los dos idiomas)                       */
+/* PRECIOS (comunes a los dos idiomas, sin IVA)                        */
 /* ================================================================== */
 export const prices = {
-  basico: '15',
-  profesional: '25',
-  // El plan Personalizado no tiene precio: muestra un botón de presupuesto.
+  essential: '19',
+  professional: '39',
+  addonWebsite: '29',
+  addonWhatsapp: '19',
+  addonAiAgent: '39',
+  addonBookingIntegrations: '19',
+  addonLoyalty: '12',
 };
 
 /* ================================================================== */
 /* Tipos (no hace falta tocarlos)                                      */
 /* ================================================================== */
+export type FeatureItem = string | { label: string; soon?: boolean };
+
 export type Plan = {
   id: string;
   name: string;
-  /** Precio mensual, sin símbolo €. `null` = sin precio (plan a medida, con botón de contacto). */
+  /** Precio mensual sin €. `null` = sin precio (plan a medida, con botón de presupuesto). */
   price: string | null;
+  tagline: string;
   description: string;
-  /** Primera línea en negrita, p. ej. "Todo lo del Plan Básico, más:". Opcional. */
+  /** Primera línea en negrita, p. ej. "Todo Essential, más:". Opcional. */
   includesPrevious?: string;
-  features: string[];
+  features: FeatureItem[];
+  /** Línea final, p. ej. "1 establecimiento". */
+  limit?: string;
   cta: { label: string; href: string };
-  /** Marca el plan como recomendado (diseño destacado). Usa solo uno. */
   highlighted?: boolean;
+};
+
+export type CompareRow = { label: string; essential: string | boolean; professional: string | boolean };
+
+export type Addon = {
+  id: string;
+  name: string;
+  /** Precio sin €; `null` = presupuesto. */
+  price: string | null;
+  /** true = «desde X €/mes». */
+  from?: boolean;
+  description: string;
+  soon?: boolean;
+  /** Texto de un enlace a la web de Lintel (la URL está en site.ts). */
+  lintelLink?: string;
 };
 
 /* ================================================================== */
@@ -44,89 +68,300 @@ export type Plan = {
 export const pricingConfig = pick({
   es: {
     period: '/mes',
-    planPrefix: 'Plan',
-    highlightLabel: 'Recomendado',
-    customPriceLabel: 'A medida',
-    customPriceNote: 'Precio según tu proyecto',
-    note: 'Los planes Básico y Profesional se contratan mediante suscripción mensual.',
-    /** Línea bajo los planes que enlaza con Lintel (la URL está en site.ts). */
-    lintel: { before: '¿También necesitas una web? La hacemos con ', name: 'Lintel', after: ', conectada a tu TPV.', link: 'Ver Lintel' },
+    planPrefix: '',
+    highlightLabel: 'Más completo',
+    customPriceLabel: 'Presupuesto',
+    customPriceNote: 'Según tus locales y necesidades',
+    note: 'Precios sin IVA. Essential y Professional se contratan mediante suscripción mensual.',
+    soon: 'Próximamente',
+    soonNote: 'Las funciones marcadas como «Próximamente» están en desarrollo y se activarán cuando estén listas y validadas.',
+    compare: { title: 'Comparativa rápida', feature: 'Funcionalidad', included: 'Incluido', notIncluded: 'No incluido' },
+    addons: {
+      title: 'Add-ons opcionales',
+      intro: 'Amplía tu plan cuando lo necesites, sin cambiar de plan.',
+      from: 'desde',
+      quote: 'Presupuesto',
+    },
   },
   en: {
     period: '/month',
     planPrefix: '',
-    highlightLabel: 'Recommended',
-    customPriceLabel: 'Tailored',
-    customPriceNote: 'Priced to your project',
-    note: 'Basic and Professional are billed as a monthly subscription.',
-    lintel: { before: 'Need a website too? We build it with ', name: 'Lintel', after: ', connected to your POS.', link: 'Visit Lintel' },
+    highlightLabel: 'Most complete',
+    customPriceLabel: 'Quote',
+    customPriceNote: 'Based on your locations and needs',
+    note: 'Prices exclude VAT. Essential and Professional are billed as a monthly subscription.',
+    soon: 'Coming soon',
+    soonNote: 'Features marked “Coming soon” are in development and will be enabled once they are ready and validated.',
+    compare: { title: 'Quick comparison', feature: 'Feature', included: 'Included', notIncluded: 'Not included' },
+    addons: {
+      title: 'Optional add-ons',
+      intro: 'Extend your plan whenever you need to, without switching plans.',
+      from: 'from',
+      quote: 'Quote',
+    },
   },
 });
 
 export const plans: Plan[] = pick<Plan[]>({
   es: [
     {
-      id: 'basico',
-      name: 'Básico',
-      price: prices.basico,
-      description: 'Lo esencial para vender, cobrar y cerrar la caja del día.',
-      features: ['TPV', 'Reservas', 'Cierre diario', 'Plano de salas (hostelería)', 'Comandero (hostelería)'],
+      id: 'essential',
+      name: 'Essential',
+      price: prices.essential,
+      tagline: 'Todo lo esencial',
+      description: 'Todo lo necesario para gestionar tu negocio desde una sola plataforma.',
+      features: [
+        'TPV y cobros',
+        'Caja y cierre diario',
+        'Modo offline',
+        'Reservas y asignación de mesas',
+        'Pedidos online',
+        'Carta o catálogo digital',
+        'Plano interactivo de mesas (hostelería)',
+        'Pedidos y comandas por mesa (hostelería)',
+        'Analíticas de ventas y pedidos',
+        'Stock básico',
+        'Usuarios y permisos básicos',
+        { label: 'Integraciones de delivery', soon: true },
+        { label: 'Facturación conforme a normativa (VeriFactu)', soon: true },
+      ],
+      limit: '1 establecimiento',
       cta: { label: 'Solicitar información', href: '#contacto' },
     },
     {
-      id: 'profesional',
-      name: 'Profesional',
-      price: prices.profesional,
-      description: 'Pedidos online, Verifactu, analítica y modo offline.',
-      includesPrevious: 'Todo lo del Plan Básico, más:',
-      features: ['Pedidos online', 'Verifactu', 'Analítica básica', 'Modo offline', 'KDS de cocina (hostelería)', 'Comandero QR (hostelería)'],
+      id: 'professional',
+      name: 'Professional',
+      price: prices.professional,
+      tagline: 'Más control y automatización',
+      description: 'Para optimizar el servicio y gestionar varios locales.',
+      includesPrevious: 'Todo Essential, más:',
+      features: [
+        'Comandero digital para el personal',
+        'Carta y pedidos por QR',
+        'KDS: pantalla de cocina (hostelería)',
+        'Reservas avanzadas',
+        'Stock avanzado y escandallos',
+        'Gestión de turnos y personal',
+        'Analíticas avanzadas',
+        'Informes de rentabilidad',
+        'Automatizaciones operativas',
+      ],
+      limit: 'Hasta 3 establecimientos incluidos',
       cta: { label: 'Solicitar información', href: '#contacto' },
       highlighted: true,
     },
     {
-      id: 'personalizado',
-      name: 'Personalizado',
+      id: 'custom',
+      name: 'Custom',
       price: null,
-      description: 'Para varios locales o necesidades propias. Lo adaptamos a tu negocio.',
-      includesPrevious: 'Todo lo del Plan Profesional, más:',
-      features: ['Multi-local', 'Control de stock', 'CRM', 'Analítica completa'],
+      tagline: 'Solución a medida',
+      description: 'Para cadenas, franquicias y negocios con necesidades específicas.',
+      includesPrevious: 'Todo Professional, más:',
+      features: [
+        'Más de 3 establecimientos',
+        'Integraciones personalizadas',
+        'Automatizaciones personalizadas',
+        'Informes consolidados por grupo',
+        'Onboarding y formación',
+        'Soporte adaptado',
+        { label: 'Agentes de IA a medida', soon: true },
+      ],
       cta: { label: 'Pedir presupuesto', href: '#contacto' },
     },
   ],
   en: [
     {
-      id: 'basico',
-      name: 'Basic',
-      price: prices.basico,
-      description: 'The essentials to sell, take payments and cash up each day.',
-      features: ['POS', 'Bookings', 'Daily cash-up', 'Floor plan (hospitality)', 'Order taking (hospitality)'],
+      id: 'essential',
+      name: 'Essential',
+      price: prices.essential,
+      tagline: 'All the essentials',
+      description: 'Everything you need to run your business from a single platform.',
+      features: [
+        'POS and payments',
+        'Till and daily cash-up',
+        'Offline mode',
+        'Bookings and table allocation',
+        'Online orders',
+        'Digital catalogue or menu',
+        'Interactive floor plan (hospitality)',
+        'Orders and tickets by table (hospitality)',
+        'Sales and order analytics',
+        'Basic stock',
+        'Basic users and permissions',
+        { label: 'Delivery integrations', soon: true },
+        { label: 'Compliant invoicing (VeriFactu)', soon: true },
+      ],
+      limit: '1 location',
       cta: { label: 'Get information', href: '#contacto' },
     },
     {
-      id: 'profesional',
+      id: 'professional',
       name: 'Professional',
-      price: prices.profesional,
-      description: 'Online orders, Verifactu, analytics and offline mode.',
-      includesPrevious: 'Everything in Basic, plus:',
+      price: prices.professional,
+      tagline: 'More control and automation',
+      description: 'To streamline service and manage several locations.',
+      includesPrevious: 'Everything in Essential, plus:',
       features: [
-        'Online orders',
-        'Verifactu',
-        'Basic analytics',
-        'Offline mode',
-        'Kitchen display (hospitality)',
-        'QR ordering (hospitality)',
+        'Digital order taking for staff',
+        'QR menu and ordering',
+        'KDS: kitchen display (hospitality)',
+        'Advanced bookings',
+        'Advanced stock and recipe costing',
+        'Shift and staff management',
+        'Advanced analytics',
+        'Profitability reports',
+        'Operational automations',
       ],
+      limit: 'Up to 3 locations included',
       cta: { label: 'Get information', href: '#contacto' },
       highlighted: true,
     },
     {
-      id: 'personalizado',
+      id: 'custom',
       name: 'Custom',
       price: null,
-      description: 'For several locations or specific needs. We tailor it to your business.',
+      tagline: 'Tailored solution',
+      description: 'For chains, franchises and businesses with specific needs.',
       includesPrevious: 'Everything in Professional, plus:',
-      features: ['Multi-location', 'Stock control', 'CRM', 'Full analytics'],
+      features: [
+        'More than 3 locations',
+        'Custom integrations',
+        'Custom automations',
+        'Consolidated group reports',
+        'Onboarding and training',
+        'Tailored support',
+        { label: 'Custom AI agents', soon: true },
+      ],
       cta: { label: 'Request a quote', href: '#contacto' },
+    },
+  ],
+});
+
+/** Comparativa rápida Essential / Professional. `true` = incluido, `false` = no, texto = nivel. */
+export const compareRows: CompareRow[] = pick<CompareRow[]>({
+  es: [
+    { label: 'TPV y caja', essential: true, professional: true },
+    { label: 'Modo offline', essential: true, professional: true },
+    { label: 'Reservas', essential: true, professional: 'Avanzadas' },
+    { label: 'Pedidos online', essential: true, professional: true },
+    { label: 'Plano interactivo de mesas', essential: true, professional: true },
+    { label: 'Cierre de caja', essential: true, professional: true },
+    { label: 'Analíticas', essential: 'Básicas', professional: 'Avanzadas' },
+    { label: 'Inventario', essential: 'Básico', professional: 'Avanzado' },
+    { label: 'Comandero para el personal', essential: false, professional: true },
+    { label: 'Carta y pedidos por QR', essential: false, professional: true },
+    { label: 'KDS de cocina', essential: false, professional: true },
+    { label: 'Turnos y personal', essential: false, professional: true },
+    { label: 'Establecimientos', essential: '1', professional: 'Hasta 3' },
+  ],
+  en: [
+    { label: 'POS and till', essential: true, professional: true },
+    { label: 'Offline mode', essential: true, professional: true },
+    { label: 'Bookings', essential: true, professional: 'Advanced' },
+    { label: 'Online orders', essential: true, professional: true },
+    { label: 'Interactive floor plan', essential: true, professional: true },
+    { label: 'Daily cash-up', essential: true, professional: true },
+    { label: 'Analytics', essential: 'Basic', professional: 'Advanced' },
+    { label: 'Inventory', essential: 'Basic', professional: 'Advanced' },
+    { label: 'Staff order taking', essential: false, professional: true },
+    { label: 'QR menu and ordering', essential: false, professional: true },
+    { label: 'Kitchen display (KDS)', essential: false, professional: true },
+    { label: 'Shifts and staff', essential: false, professional: true },
+    { label: 'Locations', essential: '1', professional: 'Up to 3' },
+  ],
+});
+
+export const addons: Addon[] = pick<Addon[]>({
+  es: [
+    {
+      id: 'web',
+      name: 'Página web propia conectada',
+      price: prices.addonWebsite,
+      description: 'Tu web con reservas y pedidos conectados a Clientia. La diseñamos con Lintel.',
+      lintelLink: 'Ver Lintel',
+    },
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp y recordatorios automáticos',
+      price: prices.addonWhatsapp,
+      from: true,
+      description: 'Confirmaciones y recordatorios para reducir ausencias.',
+      soon: true,
+    },
+    {
+      id: 'ai',
+      name: 'Agente de IA para reservas y atención',
+      price: prices.addonAiAgent,
+      from: true,
+      description: 'Responde dudas y gestiona reservas a cualquier hora.',
+      soon: true,
+    },
+    {
+      id: 'booking-integrations',
+      name: 'Integraciones avanzadas de reservas',
+      price: prices.addonBookingIntegrations,
+      from: true,
+      description: 'Conexión con plataformas de reservas compatibles.',
+      soon: true,
+    },
+    {
+      id: 'loyalty',
+      name: 'Fidelización y gamificación',
+      price: prices.addonLoyalty,
+      description: 'Premia a tus clientes habituales para que vuelvan.',
+      soon: true,
+    },
+    {
+      id: 'setup',
+      name: 'Implantación y hardware',
+      price: null,
+      description: 'Puesta en marcha, formación y equipos. Pago único según tu proyecto.',
+    },
+  ],
+  en: [
+    {
+      id: 'web',
+      name: 'Your own connected website',
+      price: prices.addonWebsite,
+      description: 'Your website with bookings and orders connected to Clientia. Designed with Lintel.',
+      lintelLink: 'Visit Lintel',
+    },
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp and automatic reminders',
+      price: prices.addonWhatsapp,
+      from: true,
+      description: 'Confirmations and reminders to reduce no-shows.',
+      soon: true,
+    },
+    {
+      id: 'ai',
+      name: 'AI agent for bookings and support',
+      price: prices.addonAiAgent,
+      from: true,
+      description: 'Answers questions and handles bookings around the clock.',
+      soon: true,
+    },
+    {
+      id: 'booking-integrations',
+      name: 'Advanced booking integrations',
+      price: prices.addonBookingIntegrations,
+      from: true,
+      description: 'Connection with compatible booking platforms.',
+      soon: true,
+    },
+    {
+      id: 'loyalty',
+      name: 'Loyalty and gamification',
+      price: prices.addonLoyalty,
+      description: 'Reward your regulars so they keep coming back.',
+      soon: true,
+    },
+    {
+      id: 'setup',
+      name: 'Set-up and hardware',
+      price: null,
+      description: 'Onboarding, training and equipment. One-off payment based on your project.',
     },
   ],
 });
