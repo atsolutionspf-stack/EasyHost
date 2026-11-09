@@ -12,22 +12,25 @@ export type TitleText = { title: string; text: string };
 export const heroContent = pick({
   es: {
     audience: 'TPV y CRM para comercios, hostelería y servicios',
-    title: 'Todo tu negocio, conectado en un solo lugar.',
-    lead: 'Vende, cobra, reserva y conoce a tus clientes desde una sola plataforma.',
+    title: 'TPV, reservas y pedidos online en una sola cuota.',
+    lead: 'Todo tu negocio conectado, desde {precio}/mes.',
     subtitle:
-      'Clientia reúne el TPV, la caja, las reservas, los pedidos online, el stock y la ficha de cada cliente. Sin herramientas desconectadas ni varias suscripciones.',
-    priceNote: 'Desde {precio}/mes, sin IVA.',
-    secondaryCta: { label: 'Ver funcionalidades', href: '#funcionalidades' },
+      'Clientia reúne el cobro, la caja, las reservas, los pedidos online y la ficha de cada cliente en una única plataforma. Sin pagar aparte por las reservas ni por los pedidos online.',
+    priceNote: 'Precios sin IVA.',
+    secondaryCta: { label: 'Ver planes y precios', href: '#precios' },
+    /** Señales de confianza junto a los botones: solo hechos confirmados. */
+    trust: ['Te lo dejamos configurado', 'Modo offline incluido', 'Reservas y pedidos online incluidos en Essential'],
     mockupCaption: 'Vista ilustrativa de Clientia con datos de ejemplo',
   },
   en: {
     audience: 'POS and CRM for shops, hospitality and services',
-    title: 'Your whole business, connected in one place.',
-    lead: 'Sell, take payments, manage bookings and know your customers from a single platform.',
+    title: 'POS, bookings and online orders in one subscription.',
+    lead: 'Your whole business connected, from {precio}/month.',
     subtitle:
-      'Clientia brings together your POS, till, bookings, online orders, stock and every customer’s profile. No disconnected tools, no stack of subscriptions.',
-    priceNote: 'From {precio}/month, excluding VAT.',
-    secondaryCta: { label: 'See the features', href: '#funcionalidades' },
+      'Clientia brings payments, the till, bookings, online orders and every customer’s profile together on one platform. No extra fees for bookings or online orders.',
+    priceNote: 'Prices exclude VAT.',
+    secondaryCta: { label: 'See plans and pricing', href: '#precios' },
+    trust: ['We set it up for you', 'Offline mode included', 'Bookings and online orders included in Essential'],
     mockupCaption: 'Illustrative view of Clientia with sample data',
   },
 });
@@ -51,96 +54,21 @@ export const sectorsContent = pick({
   },
 });
 
-export const problemContent = pick({
-  es: {
-    title: 'Atender ya es bastante trabajo. La gestión no debería serlo.',
-    intro: 'Así trabajan todavía muchos negocios',
-    solutionLabel: 'Con Clientia',
-    problems: [
-      {
-        title: 'La caja en un sitio y los clientes en otro',
-        text: 'Ventas, cobros y datos de clientes repartidos entre programas, libretas y hojas de cálculo.',
-      },
-      {
-        title: 'Pedidos y reservas por muchos canales',
-        text: 'Teléfono, mensajes, redes sociales… cada uno llega por un sitio distinto.',
-      },
-      {
-        title: 'Horas en tareas administrativas',
-        text: 'Tiempo que se va en apuntar, cuadrar y revisar en lugar de atender.',
-      },
-      {
-        title: 'Sin saber quién vuelve',
-        text: 'Sin una ficha de cada cliente es difícil cuidar a los habituales.',
-      },
-      {
-        title: 'Dependencia de plataformas externas',
-        text: 'Tus clientes y tus ventas pasan por canales que no controlas.',
-      },
-    ] satisfies TitleText[],
-    solution: {
-      title: 'Clientia lo reúne todo en un único sistema.',
-      text: 'El TPV, la caja, el stock y la ficha de cada cliente en una misma plataforma, pensada para usarla sin conocimientos técnicos.',
-      points: [
-        'Ventas, caja y clientes trabajan conectados.',
-        'Tus clientes reservan y piden desde tu propia web.',
-        'Lo consultas todo desde el móvil, la tablet o el ordenador.',
-      ],
-    },
-  },
-  en: {
-    title: 'Serving customers is work enough. Running the business shouldn’t be.',
-    intro: 'How many businesses still work',
-    solutionLabel: 'With Clientia',
-    problems: [
-      {
-        title: 'The till in one place, customers in another',
-        text: 'Sales, payments and customer data spread across apps, notebooks and spreadsheets.',
-      },
-      {
-        title: 'Orders and bookings from everywhere',
-        text: 'Phone, messages, social media… each one arrives through a different channel.',
-      },
-      {
-        title: 'Hours lost on admin',
-        text: 'Time spent writing down, balancing and checking instead of serving.',
-      },
-      {
-        title: 'No idea who comes back',
-        text: 'Without a profile for each customer, it’s hard to look after your regulars.',
-      },
-      {
-        title: 'Relying on third-party platforms',
-        text: 'Your customers and your sales go through channels you don’t control.',
-      },
-    ] satisfies TitleText[],
-    solution: {
-      title: 'Clientia brings it all into one system.',
-      text: 'POS, cash-up, stock and every customer’s profile on one platform, designed to be used without any technical knowledge.',
-      points: [
-        'Sales, cash-up and customers work together.',
-        'Your customers book and order from your own website.',
-        'You check everything from your phone, tablet or computer.',
-      ],
-    },
-  },
-});
-
 export const featuresContent = pick({
   es: {
-    title: 'Todo lo que necesitas para llevar tu negocio.',
-    intro: 'Del cobro en el mostrador al cierre de caja, con tus clientes siempre a mano.',
+    title: 'Menos tareas, más ventas.',
+    intro: 'Lo que cambia en tu día a día cuando el cobro, las reservas, los pedidos y los clientes trabajan juntos.',
   },
   en: {
-    title: 'Everything you need to run your business.',
-    intro: 'From the counter to the end-of-day cash-up, with your customers always at hand.',
+    title: 'Less admin, more sales.',
+    intro: 'What changes day to day when payments, bookings, orders and customers work together.',
   },
 });
 
 export const stepsContent = pick({
   es: {
     title: 'Empezar es sencillo.',
-    intro: 'Nos encargamos de la puesta en marcha para que tú sigas centrado en tu negocio.',
+    intro: 'Tú nos cuentas cómo trabajas; nosotros dejamos Clientia listo para tu negocio.',
     steps: [
       {
         title: 'Configuramos tu negocio',
@@ -158,7 +86,7 @@ export const stepsContent = pick({
   },
   en: {
     title: 'Getting started is easy.',
-    intro: 'We handle the set-up so you can stay focused on your business.',
+    intro: 'You tell us how you work; we get Clientia ready for your business.',
     steps: [
       {
         title: 'We set up your business',
@@ -187,50 +115,11 @@ export const pricingContent = pick({
   },
 });
 
-export const benefitsContent = pick({
-  es: {
-    title: 'Sencillo, completo y asequible.',
-    intro: 'Las tres promesas que guían Clientia, en el producto y en el trato.',
-    benefits: [
-      {
-        title: 'Sencillo',
-        text: 'Fácil de aprender y de usar en plena jornada, sin conocimientos técnicos.',
-      },
-      {
-        title: 'Completo',
-        text: 'Ventas, caja, reservas, pedidos, stock y clientes en una única plataforma conectada.',
-      },
-      {
-        title: 'Asequible',
-        text: 'Costes claros desde el primer día, y add-ons solo si los necesitas.',
-      },
-    ] satisfies TitleText[],
-  },
-  en: {
-    title: 'Simple, complete and affordable.',
-    intro: 'The three promises behind Clientia, in the product and in how we work with you.',
-    benefits: [
-      {
-        title: 'Simple',
-        text: 'Easy to learn and to use in the middle of a busy day, no technical knowledge needed.',
-      },
-      {
-        title: 'Complete',
-        text: 'Sales, till, bookings, orders, stock and customers on one connected platform.',
-      },
-      {
-        title: 'Affordable',
-        text: 'Clear costs from day one, and add-ons only if you need them.',
-      },
-    ] satisfies TitleText[],
-  },
-});
-
 /** Sección «una sola cuota en lugar de varias suscripciones». */
 export const replaceContent = pick({
   es: {
-    title: 'Una sola cuota en lugar de varias suscripciones.',
-    text: 'Muchos negocios pagan por separado un TPV, un sistema de reservas, una herramienta de pedidos online y un programa de informes. Con Clientia Essential lo tienes todo conectado en una sola plataforma.',
+    title: 'Deja de pagar por separado cada herramienta.',
+    text: 'Es habitual pagar un TPV, un sistema de reservas aparte, una herramienta de pedidos online y un programa de informes, y que ninguno hable con los demás. Con Clientia Essential lo tienes todo conectado, en una sola cuota.',
     tools: ['TPV', 'Reservas', 'Pedidos online', 'Informes y analíticas'],
     result: 'Clientia Essential',
     priceLabel: '{precio}/mes',
@@ -238,8 +127,8 @@ export const replaceContent = pick({
     cta: { label: 'Ver planes', href: '#precios' },
   },
   en: {
-    title: 'One subscription instead of several.',
-    text: 'Many businesses pay separately for a POS, a booking system, an online ordering tool and a reporting app. With Clientia Essential, it’s all connected on a single platform.',
+    title: 'Stop paying for every tool separately.',
+    text: 'It’s common to pay for a POS, a separate booking system, an online ordering tool and a reporting app, none of which talk to each other. With Clientia Essential, it’s all connected in one subscription.',
     tools: ['POS', 'Bookings', 'Online orders', 'Reports and analytics'],
     result: 'Clientia Essential',
     priceLabel: '{precio}/month',
@@ -337,4 +226,17 @@ export const faqContent = pick({
       },
     ],
   },
+});
+
+/**
+ * TESTIMONIOS
+ * La sección solo aparece si hay al menos uno. Usa únicamente opiniones reales
+ * y con permiso del cliente (nombre, negocio y, si quieres, ciudad).
+ * Ejemplo: { quote: '…', name: 'Nombre Apellido', role: 'Propietario', business: 'Nombre del negocio' }
+ */
+export type Testimonial = { quote: string; name: string; role: string; business: string };
+
+export const testimonialsContent = pick({
+  es: { title: 'Lo que dicen quienes ya lo usan', items: [] as Testimonial[] },
+  en: { title: 'What customers say', items: [] as Testimonial[] },
 });

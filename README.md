@@ -27,7 +27,7 @@ Cada archivo de `src/config` tiene los textos de los dos idiomas, en los bloques
 | **Precios** (TPV, packs de web, hora de mantenimiento). Se cambian una sola vez, en el bloque `prices`, y valen para los dos idiomas | `src/config/plans.ts` |
 | **Textos de los packs, del TPV y de los servicios adicionales** | `src/config/plans.ts` (bloques `es` y `en`) |
 | **Funcionalidades** (añadir, quitar o reordenar) | `src/config/features.ts` |
-| **Textos** de hero, problema/solución, pasos, ventajas y CTA final | `src/config/content.ts` |
+| **Textos** de portada, «deja de pagar por separado», pasos, preguntas frecuentes, testimonios y CTA final | `src/config/content.ts` |
 | **Botones, formulario, menú y mockup del panel** | `src/config/ui.ts` |
 | **Navegación, logotipo, contacto, enlaces legales y destino del formulario** | `src/config/site.ts` |
 | **Colores, tipografía y espaciados** | `src/styles/tokens.css` |

@@ -1,5 +1,6 @@
 import { heroContent } from '../config/content';
 import { siteConfig } from '../config/site';
+import { Check } from 'lucide-react';
 import { Button } from './ui/Button';
 import { DashboardMockup } from './DashboardMockup';
 import { prices } from '../config/plans';
@@ -18,7 +19,7 @@ export function Hero() {
             </h1>
           </div>
           <div className="hero__copy">
-            <p className="hero__lead">{heroContent.lead}</p>
+            <p className="hero__lead">{heroContent.lead.replace('{precio}', formatMoney(prices.essential))}</p>
             <p className="hero__subtitle">{heroContent.subtitle}</p>
             <div className="hero__actions">
               <Button href={siteConfig.primaryCta.href} size="lg">
@@ -28,7 +29,15 @@ export function Hero() {
                 {heroContent.secondaryCta.label}
               </Button>
             </div>
-            <p className="hero__price">{heroContent.priceNote.replace('{precio}', formatMoney(prices.essential))}</p>
+            <ul className="hero__trust">
+              {heroContent.trust.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.25} aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="hero__price">{heroContent.priceNote}</p>
           </div>
         </div>
 

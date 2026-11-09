@@ -1,13 +1,12 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Sectors } from './components/Sectors';
-import { ProblemSolution } from './components/ProblemSolution';
 import { Features } from './components/Features';
 import { HowItWorks } from './components/HowItWorks';
 import { ReplaceSubscriptions } from './components/ReplaceSubscriptions';
 import { Pricing } from './components/Pricing';
-import { Benefits } from './components/Benefits';
 import { Faq } from './components/Faq';
+import { Testimonials } from './components/Testimonials';
 import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
 import { ui } from './config/ui';
@@ -22,12 +21,11 @@ export default function App() {
       <main id="main">
         <Hero />
         <Sectors />
-        <ProblemSolution />
+        <ReplaceSubscriptions />
         <Features />
         <HowItWorks />
-        <ReplaceSubscriptions />
+        <Testimonials />
         <Pricing />
-        <Benefits />
         <Faq />
         <FinalCta />
       </main>
