@@ -33,6 +33,13 @@ export const ui = pick({
       again: 'Enviar otra solicitud',
       error: (email: string) => `No se ha podido enviar la solicitud. Inténtalo de nuevo o escríbenos a ${email}.`,
       mailSubject: 'Solicitud de demo',
+      fieldErrors: {
+        name: 'Escribe tu nombre para saber cómo dirigirnos a ti.',
+        restaurant: 'Escribe el nombre de tu negocio.',
+        emailEmpty: 'Escribe un email para poder responderte.',
+        emailFormat: 'Escribe un email con este formato: nombre@negocio.com.',
+        privacy: 'Acepta la política de privacidad para enviar la solicitud.',
+      },
     },
     mockup: {
       store: 'Tienda Alba',
@@ -96,6 +103,13 @@ export const ui = pick({
       again: 'Send another request',
       error: (email: string) => `The request couldn’t be sent. Please try again or email us at ${email}.`,
       mailSubject: 'Demo request',
+      fieldErrors: {
+        name: 'Enter your name so we know how to address you.',
+        restaurant: 'Enter the name of your business.',
+        emailEmpty: 'Enter an email so we can reply.',
+        emailFormat: 'Enter an email in this format: name@business.com.',
+        privacy: 'Accept the privacy policy to send the request.',
+      },
     },
     mockup: {
       store: 'Alba Store',

@@ -262,3 +262,79 @@ export const finalCtaContent = pick({
     formIntro: 'Leave us your details and we’ll get in touch to show you Clientia with your business in mind.',
   },
 });
+
+/**
+ * PREGUNTAS FRECUENTES
+ * Solo respuestas confirmadas. Si cambian precios o funciones, revisa también
+ * el bloque FAQPage de index.html y en/index.html (datos para Google).
+ */
+export const faqContent = pick({
+  es: {
+    title: 'Preguntas frecuentes',
+    intro: 'Lo que suelen preguntarnos antes de solicitar una demo.',
+    items: [
+      {
+        q: '¿Clientia sirve para mi tipo de negocio?',
+        a: 'Está pensado para comercios, hostelería y servicios que atienden a sus clientes cada día. Las funciones de sala y cocina, como el plano de mesas, las comandas o el KDS, son específicas de hostelería.',
+      },
+      {
+        q: '¿Los precios incluyen IVA?',
+        a: 'No. Essential cuesta 19 €/mes y Professional 39 €/mes, sin IVA. El plan Custom se presupuesta según tus locales y necesidades.',
+      },
+      {
+        q: '¿Cuántos locales puedo gestionar?',
+        a: 'Essential incluye 1 establecimiento y Professional, hasta 3. Si tienes más de 3, el plan Custom se adapta a tu grupo o cadena.',
+      },
+      {
+        q: '¿Qué pasa si se cae internet?',
+        a: 'El TPV incluye modo offline para que puedas seguir trabajando aunque pierdas la conexión.',
+      },
+      {
+        q: '¿Qué significa «Próximamente»?',
+        a: 'Son funciones en desarrollo, como la facturación VeriFactu o las integraciones de delivery. Se activarán cuando estén listas y validadas.',
+      },
+      {
+        q: '¿Tengo que configurarlo yo?',
+        a: 'No. Adaptamos la plataforma a tu negocio, con tus productos, tus precios y tus horarios, para que empieces a usarla sin conocimientos técnicos.',
+      },
+      {
+        q: '¿Puedo tener mi propia web conectada?',
+        a: 'Sí, con el add-on «Página web propia conectada» (+29 €/mes). La diseñamos con Lintel, con reservas y pedidos conectados a Clientia.',
+      },
+    ],
+  },
+  en: {
+    title: 'Frequently asked questions',
+    intro: 'What people usually ask us before booking a demo.',
+    items: [
+      {
+        q: 'Is Clientia right for my type of business?',
+        a: 'It’s built for shops, hospitality and service businesses that serve customers every day. Floor and kitchen features, such as the floor plan, table tickets or the KDS, are specific to hospitality.',
+      },
+      {
+        q: 'Do prices include VAT?',
+        a: 'No. Essential costs €19/month and Professional €39/month, excluding VAT. The Custom plan is quoted based on your locations and needs.',
+      },
+      {
+        q: 'How many locations can I manage?',
+        a: 'Essential includes 1 location and Professional up to 3. If you have more than 3, the Custom plan adapts to your group or chain.',
+      },
+      {
+        q: 'What happens if the internet goes down?',
+        a: 'The POS includes an offline mode so you can keep working even if you lose your connection.',
+      },
+      {
+        q: 'What does “Coming soon” mean?',
+        a: 'These are features in development, such as VeriFactu invoicing or delivery integrations. They will be enabled once they are ready and validated.',
+      },
+      {
+        q: 'Do I have to set it up myself?',
+        a: 'No. We adapt the platform to your business, with your products, prices and opening hours, so you can start using it without technical knowledge.',
+      },
+      {
+        q: 'Can I have my own connected website?',
+        a: 'Yes, with the “Your own connected website” add-on (+€29/month). We design it with Lintel, with bookings and orders connected to Clientia.',
+      },
+    ],
+  },
+});

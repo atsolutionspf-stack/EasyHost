@@ -36,12 +36,12 @@
   --wait: oklch(0.5 0.1 70);
   --wait-bg: oklch(0.95 0.05 85);
 
-  /* Tipografía: escala 1.25 sobre 17px; titulares fluidos */
+  /* Tipografía: cuerpo 16px, secundario 14px, meta 12px; titulares fluidos. Pesos: 400, 500 y 600 */
   --font-display: 'Young Serif', Georgia, serif;
   --font-body: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
-  --fs-xs: 0.8125rem;
-  --fs-sm: 0.9375rem;
-  --fs-base: 1.0625rem;
+  --fs-xs: 0.75rem; /* 12px: solo meta */
+  --fs-sm: 0.875rem; /* 14px: secundario */
+  --fs-base: 1rem; /* 16px: cuerpo */
   --fs-md: 1.3125rem;
   --fs-lg: clamp(1.45rem, 1.25rem + 0.8vw, 1.75rem);
   --fs-xl: clamp(2rem, 1.45rem + 2.2vw, 2.85rem);
@@ -66,5 +66,7 @@
   --r-sm: 6px;
   --r-md: 12px;
 
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out-quint */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* entrada */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0); /* salida */
+  /* Duraciones permitidas: 100, 150, 200 y 300 ms */
 }

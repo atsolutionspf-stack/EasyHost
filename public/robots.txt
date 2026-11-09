@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sustituye el dominio cuando tengas el definitivo
+Sitemap: https://www.clientia.example/sitemap.xml

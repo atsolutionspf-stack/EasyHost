@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FocusEvent, type FormEvent } from 'react';
 import { CircleCheck } from 'lucide-react';
 import { submitDemoRequest, type SubmitResult } from '../lib/contact';
 import { siteConfig } from '../config/site';
@@ -6,19 +6,66 @@ import { ui } from '../config/ui';
 import { Button } from './ui/Button';
 
 type State = { status: 'idle' } | { status: 'sending' } | { status: 'done'; result: SubmitResult } | { status: 'error' };
+type FieldName = 'name' | 'restaurant' | 'email' | 'privacy';
+type Errors = Partial<Record<FieldName, string>>;
 
 /** El primer enlace legal que sea la política de privacidad (en cualquiera de los dos idiomas). */
 const privacyHref = siteConfig.legal.find((l) => /privac/.test(l.href))?.href ?? '#';
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ORDER: FieldName[] = ['name', 'restaurant', 'email', 'privacy'];
 
-/** Formulario de solicitud de demo. La integración real se configura en src/lib/contact.ts. */
+/** Valida un campo y devuelve el mensaje de error, o undefined si es correcto. */
+function validate(field: FieldName, form: HTMLFormElement): string | undefined {
+  const e = ui.form.fieldErrors;
+  const el = form.elements.namedItem(field) as HTMLInputElement | null;
+  if (!el) return undefined;
+  if (field === 'privacy') return el.checked ? undefined : e.privacy;
+  const value = el.value.trim();
+  if (field === 'email') {
+    if (!value) return e.emailEmpty;
+    return EMAIL_RE.test(value) ? undefined : e.emailFormat;
+  }
+  if (!value) return field === 'name' ? e.name : e.restaurant;
+  return undefined;
+}
+
+/**
+ * Formulario de solicitud de demo. La integración real se configura en src/lib/contact.ts.
+ * Validación: al salir de cada campo (nunca mientras se escribe por primera vez); el error
+ * desaparece con la primera corrección; el botón de enviar está siempre activo.
+ */
 export function DemoForm() {
   const [state, setState] = useState<State>({ status: 'idle' });
+  const [errors, setErrors] = useState<Errors>({});
+  const formRef = useRef<HTMLFormElement>(null);
   const f = ui.form;
   const email = siteConfig.contact.email;
 
+  const setFieldError = (field: FieldName, message: string | undefined) =>
+    setErrors((prev) => (prev[field] === message ? prev : { ...prev, [field]: message }));
+
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const field = e.currentTarget.name as FieldName;
+    if (!ORDER.includes(field) || !formRef.current) return;
+    setFieldError(field, validate(field, formRef.current));
+  };
+  const clear = (field: FieldName) => () => setFieldError(field, undefined);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (state.status === 'sending') return;
     const form = e.currentTarget;
+    const next: Errors = {};
+    for (const field of ORDER) next[field] = validate(field, form);
+    setErrors(next);
+    const firstInvalid = ORDER.find((field) => next[field]);
+    if (firstInvalid) {
+      const el = form.elements.namedItem(firstInvalid) as HTMLElement | null;
+      el?.focus();
+      el?.scrollIntoView({ block: 'center' });
+      return;
+    }
+
     const data = new FormData(form);
     setState({ status: 'sending' });
     try {
@@ -50,19 +97,43 @@ export function DemoForm() {
     );
   }
 
+  /** Atributos comunes de accesibilidad y validación para un campo. */
+  const fieldProps = (field: FieldName) => ({
+    'aria-invalid': errors[field] ? true : undefined,
+    'aria-describedby': errors[field] ? `df-${field}-error` : undefined,
+    onBlur,
+    onInput: clear(field),
+  });
+  const ErrorText = ({ field }: { field: FieldName }) =>
+    errors[field] ? (
+      <p id={`df-${field}-error`} className="field__error">
+        {errors[field]}
+      </p>
+    ) : null;
+
   return (
-    <form className="demo-form" onSubmit={handleSubmit}>
-      <div className="field">
+    <form ref={formRef} className="demo-form" onSubmit={handleSubmit} noValidate>
+      <div className={`field ${errors.name ? 'field--invalid' : ''}`}>
         <label htmlFor="df-name">{f.name}</label>
-        <input id="df-name" name="name" type="text" autoComplete="name" required />
+        <input id="df-name" name="name" type="text" autoComplete="name" required {...fieldProps('name')} />
+        <ErrorText field="name" />
       </div>
-      <div className="field">
+      <div className={`field ${errors.restaurant ? 'field--invalid' : ''}`}>
         <label htmlFor="df-restaurant">{f.restaurant}</label>
-        <input id="df-restaurant" name="restaurant" type="text" autoComplete="organization" required />
+        <input
+          id="df-restaurant"
+          name="restaurant"
+          type="text"
+          autoComplete="organization"
+          required
+          {...fieldProps('restaurant')}
+        />
+        <ErrorText field="restaurant" />
       </div>
-      <div className="field">
+      <div className={`field ${errors.email ? 'field--invalid' : ''}`}>
         <label htmlFor="df-email">{f.email}</label>
-        <input id="df-email" name="email" type="email" autoComplete="email" required />
+        <input id="df-email" name="email" type="email" autoComplete="email" required {...fieldProps('email')} />
+        <ErrorText field="email" />
       </div>
       <div className="field">
         <label htmlFor="df-phone">
@@ -76,12 +147,15 @@ export function DemoForm() {
         </label>
         <textarea id="df-message" name="message" rows={3} />
       </div>
-      <div className="field field--full field--check">
-        <input id="df-privacy" name="privacy" type="checkbox" required />
-        <label htmlFor="df-privacy">
-          {f.privacyBefore}
-          <a href={privacyHref}>{f.privacyLink}</a>.
-        </label>
+      <div className={`field field--full ${errors.privacy ? 'field--invalid' : ''}`}>
+        <div className="field--check">
+          <input id="df-privacy" name="privacy" type="checkbox" required {...fieldProps('privacy')} onChange={clear('privacy')} />
+          <label htmlFor="df-privacy">
+            {f.privacyBefore}
+            <a href={privacyHref}>{f.privacyLink}</a>.
+          </label>
+        </div>
+        <ErrorText field="privacy" />
       </div>
 
       {state.status === 'error' && (
@@ -90,7 +164,12 @@ export function DemoForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" className="field--full demo-form__submit" disabled={state.status === 'sending'}>
+      <Button
+        type="submit"
+        size="lg"
+        className="field--full demo-form__submit"
+        aria-busy={state.status === 'sending' ? true : undefined}
+      >
         {state.status === 'sending' ? f.sending : siteConfig.primaryCta.label}
       </Button>
     </form>

@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO for the English version. The Spanish version is in ../index.html -->
-    <title>Clientia | POS and CRM for your business</title>
+    <title>Clientia | POS and CRM software for your business</title>
     <meta
       name="description"
-      content="Clientia is the POS and CRM for shops, hospitality and services: sales, cash-up, stock, bookings, online orders and every customer’s profile on one platform. Book a demo."
+      content="POS and CRM for shops, hospitality and services: sales, till, bookings, orders and customers on one platform. From €19/month. Book a demo."
     />
     <meta name="theme-color" content="#1d2540" />
     <!-- Replace with the final domain -->
@@ -21,7 +21,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="Clientia" />
-    <meta property="og:title" content="Clientia | POS and CRM for your business" />
+    <meta property="og:title" content="Clientia | POS and CRM software for your business" />
     <meta
       property="og:description"
       content="Sales, cash-up, stock, orders and customers on one platform."
@@ -33,6 +33,119 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Datos estructurados para Google. Si cambias precios o preguntas, actualízalos también aquí. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Clientia",
+      "url": "https://www.clientia.example/",
+      "email": "contacto@clientia.example"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Clientia",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "en",
+      "url": "https://www.clientia.example/en/",
+      "description": "POS and CRM for shops, hospitality and services: sales, till, bookings, orders and customers on one platform. From €19/month. Book a demo.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Essential",
+          "price": "19",
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "19",
+            "priceCurrency": "EUR",
+            "unitCode": "MON",
+            "valueAddedTaxIncluded": false
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Professional",
+          "price": "39",
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "39",
+            "priceCurrency": "EUR",
+            "unitCode": "MON",
+            "valueAddedTaxIncluded": false
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Clientia right for my type of business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It’s built for shops, hospitality and service businesses that serve customers every day. Floor and kitchen features, such as the floor plan, table tickets or the KDS, are specific to hospitality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do prices include VAT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Essential costs €19/month and Professional €39/month, excluding VAT. The Custom plan is quoted based on your locations and needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many locations can I manage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Essential includes 1 location and Professional up to 3. If you have more than 3, the Custom plan adapts to your group or chain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if the internet goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The POS includes an offline mode so you can keep working even if you lose your connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does “Coming soon” mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "These are features in development, such as VeriFactu invoicing or delivery integrations. They will be enabled once they are ready and validated."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to set it up myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We adapt the platform to your business, with your products, prices and opening hours, so you can start using it without technical knowledge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I have my own connected website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with the “Your own connected website” add-on (+€29/month). We design it with Lintel, with bookings and orders connected to Clientia."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
   </head>
   <body>
     <div id="root"></div>

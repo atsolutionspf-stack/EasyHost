@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sustituye https://www.clientia.example por el dominio definitivo -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.clientia.example/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.clientia.example/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.clientia.example/en/" />
+  </url>
+  <url>
+    <loc>https://www.clientia.example/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.clientia.example/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.clientia.example/en/" />
+  </url>
+</urlset>
